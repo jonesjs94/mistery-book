@@ -1,0 +1,38 @@
+.buscador {
+    position: relative;
+    height: 400px;
+    background-image: url(/images/FoodBackground.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+}
+
+.form {
+    position: absolute;
+    width: 40%;
+    top: 150px;
+    left: 30%;
+}
+
+.recetario {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.receta {
+
+}
+
+.cargando {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ingresar {
+    padding: 20px;
+    background: #343a40;
+    color: #fff;
+    width: 500px;
+}

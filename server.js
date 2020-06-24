@@ -53,6 +53,7 @@ app.post("/login", middleware.isNotLoggedIn, passport.authenticate("local"), (re
 });
 
 app.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
+  // Hashea contraseña
   const hashedPass = await bcrypt.hash(req.body.password, 10);
   
   const newUser = new User({
@@ -60,7 +61,7 @@ app.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
     password: hashedPass
   });
   
-  // Loguea al usuario recién creaqdo
+  // Crea usuario nuevo
   newUser.save((err, user) => {
     if(err) {
       console.error(err);
@@ -68,7 +69,7 @@ app.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
     }
     console.log(user);
 
-    // Loguea al usuario recién creaqdo
+    // Loguea al usuario recién creado
     req.login(user, (err) => {
       if(err) return next(err);
       res.send({user: user});
