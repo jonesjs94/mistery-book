@@ -6,6 +6,7 @@ class FormularioIngresar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      url: 'login',
       username: '',
       password: ''
     }
@@ -22,6 +23,7 @@ class FormularioIngresar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    
     const cabecera = new Headers();
     cabecera.set("Content-Type", "application/json");
 

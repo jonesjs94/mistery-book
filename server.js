@@ -8,8 +8,6 @@ const express            = require("express"),
 
 // ROUTES
 const indexRoute = require("./routes/index");
-
-app.use(indexRoute);
    
 // DB CONNECTION
 mongoose.connect(
@@ -39,6 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 initializePassport();
 
+// ROUTES
+app.use(indexRoute);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log("Server up!"))

@@ -1,15 +1,17 @@
 import React from 'react';
-import '../../style.css';
 import encontrarRecetas from '../../services/api/request';
-// Bootstrap Components
+import '../../style.css';
+// Bootstrap 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// App Components
+// App
 import Receta from './Tarjeta';
 import Buscador from './Buscador';
 import Cargador from './Cargador';
-
+// Redux
+import { store } from '../../store';
+import { establecerConsulta } from '../../actions';
 
 export default class Principal extends React.Component {
   constructor(props) {
@@ -22,10 +24,11 @@ export default class Principal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async handleSubmit(busqueda) {
+  async handleSubmit(consulta) {
+    store.dispatch(establecerConsulta(consulta));
     this.setState({
       cargando: true,
-      value: busqueda
+      value: consulta
     }, async () => {
       try {
         const recetas = await encontrarRecetas(this.state.value);
@@ -37,6 +40,10 @@ export default class Principal extends React.Component {
         console.error(e);
       }
     })
+  }
+
+  handlebtn() {
+    console.log(store.getState());
   }
 
   render() {
@@ -62,6 +69,7 @@ export default class Principal extends React.Component {
     return (
       <>
         <Buscador onSubmit={this.handleSubmit}></Buscador>
+        <button onClick={this.handlebtn}>mostrar</button>
         <Container className="recetario" fluid>
           <Row>
             {contenido}

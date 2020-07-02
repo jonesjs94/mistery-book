@@ -5,10 +5,11 @@ import {
   Route
 } from "react-router-dom";
 
-import Principal from './components/Principal';
-import Muestra from './components/Muestra';
-import Navegador from './components/Navegador';
-import FormularioCrear from './components/Navegador/Cuenta/Crear';
+import Principal from './Principal';
+import Muestra from './Muestra';
+import Navegador from './Navegador';
+import FormularioCrear from './Navegador/Usuario/Crear';
+
 
 export default function App() {
   return (

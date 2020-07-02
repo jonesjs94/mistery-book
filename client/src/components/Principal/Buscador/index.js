@@ -1,13 +1,15 @@
 import React from 'react';
-// Bootstrap Components 
+// Bootstrap 
 import Form from 'react-bootstrap/Form';
+// Redux
+import { store } from '../../../store';
 
 export default class Buscador extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         value: '',
-      }
+      }      
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }

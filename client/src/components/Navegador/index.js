@@ -9,10 +9,33 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 // Componentes
-import FormularioIngresar from './Cuenta/Ingresar';
+import FormularioIngresar from './Usuario/Ingresar';
 
 
-export default function Navegador(props) {
+export default class Navegador extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const cabecera = new Headers();
+    cabecera.set("Content-Type", "application/json");
+
+    fetch('/signup', {
+      method: 'POST',
+      headers: cabecera,
+      body: JSON.stringify(this.state)
+    })
+    .then(response => response.text())
+    .then(info => console.log(info))
+  }
+  
+  render() {
     return (
       <Navbar id="navegador" bg="dark" variant="dark" expand="md">
         <Navbar.Brand as={Link} to="/">Mysterious Book</Navbar.Brand>
@@ -33,7 +56,7 @@ export default function Navegador(props) {
               render={attrs => (
                 <FormularioIngresar />
               )}>
-               <Button variant="dark">Login</Button>
+              <Button variant="dark">Login</Button>
               </Tippy>
             </Nav.Item>
             <Nav.Item>
@@ -44,4 +67,29 @@ export default function Navegador(props) {
       </Navbar>
       
     )
+  }
+}
+
+  function Invitado(props) {
+    return (
+      <Nav className="ml-auto">
+      <Nav.Item>
+        <Tippy
+        trigger="click"
+        interactive={true}
+        render={attrs => (
+          <FormularioIngresar />
+        )}>
+         <Button variant="dark">Login</Button>
+        </Tippy>
+      </Nav.Item>
+      <Nav.Item>
+        <Button as={Link} to="/signup" variant="success">Sign up</Button>
+      </Nav.Item>
+    </Nav>
+    )
+  }
+
+  function Usuario(props) {
+
   }

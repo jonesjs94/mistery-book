@@ -14,7 +14,7 @@ export default async function encontrarRecetas(valor) {
    if (respuesta.status !== 200 || resultado.recipes === undefined) {
       throw Error("No hay recetas de esa comida");
    }
-
+   console.log(resultado.recipes)
    return resultado.recipes;
  }
 
