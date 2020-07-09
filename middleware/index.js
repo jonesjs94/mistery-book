@@ -11,7 +11,8 @@ middlewareObject.isNotLoggedIn = (req, res, next) => {
   if(!req.isAuthenticated()) {
     return next(); 
   }
-  console.log("error isnotloggedin")
+  console.log("Ya hay un usuario logueado")
+  console.log(req.user)
 }
 
 module.exports = middlewareObject;

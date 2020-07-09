@@ -2,8 +2,10 @@ import React from 'react';
 // Componentes Bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+// Funciones
+import { instancearUsuario } from '../../../../utils';
 
-class Formulario extends React.Component {
+class FormCrearUsuario extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,13 +29,19 @@ class Formulario extends React.Component {
     const cabecera = new Headers();
     cabecera.set("Content-Type", "application/json");
 
+    // Envío información del usuario nuevo
     fetch('/signup', {
       method: 'POST',
       headers: cabecera,
       body: JSON.stringify(this.state)
     })
-    .then(response => response.text())
-    .then(info => console.log(info))
+    .then(respuesta => respuesta.json())
+    .then(usuario => {
+      console.log(usuario);
+      // Establezco usuario en el estado 
+      // ya que lo logueo cuando se registra
+      instancearUsuario(usuario);
+    })
   }
 
   render() {
@@ -64,4 +72,4 @@ class Formulario extends React.Component {
 
 }
 
-export default Formulario;
+export default FormCrearUsuario;

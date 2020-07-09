@@ -1,8 +1,11 @@
 import React from 'react';
+// Bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+// Funciones
+import { instancearUsuario } from '../../../../utils';
 
-class FormularioIngresar extends React.Component {
+class FormIngresarUsuario extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,8 +35,13 @@ class FormularioIngresar extends React.Component {
       headers: cabecera,
       body: JSON.stringify(this.state)
     })
-    .then(response => response.text())
-    .then(info => console.log(info))
+    .then(respuesta => respuesta.json())
+    .then(usuario => {
+      console.log(usuario)
+      // Establezco usuario en el estado 
+      instancearUsuario(usuario);
+    })
+
   }
 
   render() {
@@ -65,4 +73,4 @@ class FormularioIngresar extends React.Component {
   }
 }
 
-export default FormularioIngresar;
+export default FormIngresarUsuario;

@@ -9,7 +9,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 // Componentes
-import FormularioIngresar from './Usuario/Ingresar';
+import FormIngresarUsuario from './Usuario/Ingresar';
 
 
 export default class Navegador extends React.Component {
@@ -54,7 +54,7 @@ export default class Navegador extends React.Component {
               trigger="click"
               interactive={true}
               render={attrs => (
-                <FormularioIngresar />
+                <FormIngresarUsuario />
               )}>
               <Button variant="dark">Login</Button>
               </Tippy>
@@ -70,26 +70,10 @@ export default class Navegador extends React.Component {
   }
 }
 
-  function Invitado(props) {
-    return (
-      <Nav className="ml-auto">
-      <Nav.Item>
-        <Tippy
-        trigger="click"
-        interactive={true}
-        render={attrs => (
-          <FormularioIngresar />
-        )}>
-         <Button variant="dark">Login</Button>
-        </Tippy>
-      </Nav.Item>
-      <Nav.Item>
-        <Button as={Link} to="/signup" variant="success">Sign up</Button>
-      </Nav.Item>
-    </Nav>
-    )
-  }
+  // function Invitado(props) {
 
-  function Usuario(props) {
+  // }
 
-  }
+  // function Usuario(props) {
+
+  // }

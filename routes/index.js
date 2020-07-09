@@ -7,7 +7,7 @@ const express    = require("express"),
 
 // ingreso
 router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local"), (req, res) => {
-  res.send({ user: req.user })
+  res.send(req.user);
 });
 
 // registro
@@ -17,7 +17,9 @@ router.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
   
   const newUser = new User({
     username: req.body.username,
-    password: hashedPass
+    password: hashedPass,
+    favorites: {},
+    history: {}
   });
   
   // Crea usuario nuevo
@@ -31,7 +33,7 @@ router.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
     // Loguea al usuario recién creado
     req.login(user, (err) => {
       if(err) return next(err);
-      res.send({user: user});
+      res.send(user);
     });
   })
 })

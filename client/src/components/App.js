@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 
 import Principal from './Principal';
-import Muestra from './Muestra';
+import Receta from './Principal/Receta';
 import Navegador from './Navegador';
-import FormularioCrear from './Navegador/Usuario/Crear';
+import FormCrearUsuario from './Navegador/Usuario/Crear';
 
 
 export default function App() {
@@ -17,8 +17,8 @@ export default function App() {
       <Navegador />
       <Switch>
         <Route exact path="/" component={Principal} />
-        <Route exact path="/muestra" component={Muestra} />
-        <Route exact path="/signup" component={FormularioCrear} />
+        <Route exact path="/receta" component={Receta} />
+        <Route exact path="/signup" component={FormCrearUsuario} />
       </Switch>  
     </Router>
   )

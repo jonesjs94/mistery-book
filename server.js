@@ -8,6 +8,7 @@ const express            = require("express"),
 
 // ROUTES
 const indexRoute = require("./routes/index");
+const historyRoute = require("./routes/history");
    
 // DB CONNECTION
 mongoose.connect(
@@ -39,6 +40,13 @@ initializePassport();
 
 // ROUTES
 app.use(indexRoute);
+app.use(historyRoute);
+
+// GLOBAL VARIABLES
+app.use((req, res, next) => {
+  res.locals.activeUser = req.user;
+  next();
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log("Server up!"))

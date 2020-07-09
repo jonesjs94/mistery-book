@@ -9,7 +9,8 @@ const UserSchema = mongoose.Schema({
     type: String,
     require: true
   },
-  favorites: []
-});
+  favorites: {},
+  history: {}
+}, {minimize: false});
 
 module.exports = mongoose.model("User", UserSchema);

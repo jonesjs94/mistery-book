@@ -1,8 +1,6 @@
 import React from 'react';
 // Bootstrap 
 import Form from 'react-bootstrap/Form';
-// Redux
-import { store } from '../../../store';
 
 export default class Buscador extends React.Component {
     constructor(props) {
@@ -22,6 +20,7 @@ export default class Buscador extends React.Component {
   
     handleSubmit(e) {
       e.preventDefault();
+      // Envío consulta hacia componente padre para que haga la llamada a la API
       this.props.onSubmit(this.state.value);
     }
     
