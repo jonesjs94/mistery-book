@@ -7,6 +7,7 @@ const express    = require("express"),
 
 router.post("/history", (req, res) => {
   User.findByIdAndUpdate(req.user._id, req.body);
+  console.log("llego")
 });
 
 module.exports = router;

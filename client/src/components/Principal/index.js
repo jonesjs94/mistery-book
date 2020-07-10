@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../style.css';
-import { instancearHistorial } from '../../utils';
 // Bootstrap 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,10 +10,7 @@ import Buscador from './Buscador';
 import Cargador from './Cargador';
 // Redux
 import { store } from '../../store';
-import { 
-  establecer_consulta, 
-  obtener_recetario
-} from '../../actions';
+import { busca_recetas } from '../../actions';
 
 export default class Principal extends React.Component {
   constructor(props) {
@@ -25,17 +21,11 @@ export default class Principal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async handleSubmit(consulta) {
-    store.dispatch(establecer_consulta(consulta));
-
+  handleSubmit(consulta) {
     // Despliego Icono de carga 
     this.setState({ cargando: true }, () => {
-        // Acción de llamda a la API
-        store.dispatch(obtener_recetario(consulta));
-
+        store.dispatch(busca_recetas(consulta));
         this.setState({ cargando: false })
-
-        // instancearHistorial(consulta, recetas);
     })
   }
 

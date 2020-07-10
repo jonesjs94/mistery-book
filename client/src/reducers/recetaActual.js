@@ -1,8 +1,8 @@
-import { ESTABLECER_RECETA } from '../actions/actionTypes';
+import { ESTABLECE_RECETA } from '../actions/actionTypes';
 
 export default function recetaActual(state = "", action) {
   switch (action.type) {
-    case ESTABLECER_RECETA:
+    case ESTABLECE_RECETA:
       return action.payload;
     default:
       return state;  

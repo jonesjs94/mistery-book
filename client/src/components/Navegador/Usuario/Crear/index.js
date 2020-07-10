@@ -3,7 +3,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // Acciones
-import { ingresar_usuario } from '../../../../actions';
+import { ingresa_usuario } from '../../../../actions';
 // Store
 import { store } from '../../../../store';
 
@@ -39,10 +39,9 @@ class FormCrearUsuario extends React.Component {
     })
     .then(respuesta => respuesta.json())
     .then(usuario => {
+      // Despacho usuario al estado 
+      store.dispatch(ingresa_usuario(usuario));
       console.log(usuario);
-      // Establezco usuario en el estado 
-      // ya que lo logueo cuando se registra
-      store.dispatch(ingresar_usuario(usuario));
     })
   }
 

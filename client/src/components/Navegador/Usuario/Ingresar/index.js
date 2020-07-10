@@ -3,7 +3,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // Actions
-import { ingresar_usuario } from '../../../../actions'; 
+import { ingresa_usuario } from '../../../../actions'; 
 import { store } from '../../../../store';
 
 class FormIngresarUsuario extends React.Component {
@@ -40,7 +40,7 @@ class FormIngresarUsuario extends React.Component {
     .then(usuario => {
       console.log(usuario)
       // Establezco usuario en el estado 
-      store.dispatch(ingresar_usuario(usuario))
+      store.dispatch(ingresa_usuario(usuario))
     })
 
   }

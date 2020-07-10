@@ -1,9 +1,9 @@
-import { ESTABLECER_RECETARIO } from './../actions/actionTypes';
+import { ESTABLECE_RECETARIO } from './../actions/actionTypes';
 
 
 export default function recetario(state = {}, action) {
   switch (action.type) {
-    case ESTABLECER_RECETARIO:
+    case ESTABLECE_RECETARIO:
       return action.payload;
     default:
       return state;
