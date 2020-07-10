@@ -1,9 +1,9 @@
-import { ESTABLECER_USUARIO } from '../actions/actionTypes';
+import { INGRESAR_USUARIO } from '../actions/actionTypes';
 
 export default function usuario(state = "", action) {
   switch (action.type) {
-    case ESTABLECER_USUARIO:
-      return action.payload;
+    case INGRESAR_USUARIO:
+      return action.payload.username;
     default: 
       return state;
   }

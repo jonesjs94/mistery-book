@@ -1,9 +1,9 @@
-import { ESTABLECER_FAVORITOS } from '../actions/actionTypes';
+import { INGRESAR_USUARIO } from '../actions/actionTypes';
 
-export default function favoritos(state = [], action) {
+export default function favoritos(state = {}, action) {
   switch (action.type) {
-    case ESTABLECER_FAVORITOS:
-      return action.payload;
+    case INGRESAR_USUARIO:
+      return action.payload.favorites;
     default:
       return state;
   }

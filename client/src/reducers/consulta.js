@@ -1,8 +1,8 @@
-import { BUSQUEDA_REALIZADA } from './../actions/actionTypes';
+import { ESTABLECER_CONSULTA } from './../actions/actionTypes';
 
 export default function consulta(state = "", action) {
   switch (action.type) {
-    case BUSQUEDA_REALIZADA:
+    case ESTABLECER_CONSULTA:
       return action.payload;
     default:
       return state;

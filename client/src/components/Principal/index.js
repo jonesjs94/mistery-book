@@ -1,5 +1,4 @@
 import React from 'react';
-import encontrarRecetas from '../../services/api/request';
 import '../../style.css';
 import { instancearHistorial } from '../../utils';
 // Bootstrap 
@@ -14,7 +13,7 @@ import Cargador from './Cargador';
 import { store } from '../../store';
 import { 
   establecer_consulta, 
-  establecer_recetario,
+  obtener_recetario
 } from '../../actions';
 
 export default class Principal extends React.Component {
@@ -30,17 +29,13 @@ export default class Principal extends React.Component {
     store.dispatch(establecer_consulta(consulta));
 
     // Despliego Icono de carga 
-    this.setState({ cargando: true }, async () => {
-      try {
-        // Reazlizo llamada a la API
-        const recetas = await encontrarRecetas(consulta);
+    this.setState({ cargando: true }, () => {
+        // Acción de llamda a la API
+        store.dispatch(obtener_recetario(consulta));
+
         this.setState({ cargando: false })
-        // Instanceo recetas e historial
-        store.dispatch(establecer_recetario(recetas));
-        instancearHistorial(consulta, recetas);
-      } catch(e) {
-        console.error(e);
-      }
+
+        // instancearHistorial(consulta, recetas);
     })
   }
 

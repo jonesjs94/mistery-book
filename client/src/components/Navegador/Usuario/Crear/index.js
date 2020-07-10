@@ -2,8 +2,10 @@ import React from 'react';
 // Componentes Bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// Funciones
-import { instancearUsuario } from '../../../../utils';
+// Acciones
+import { ingresar_usuario } from '../../../../actions';
+// Store
+import { store } from '../../../../store';
 
 class FormCrearUsuario extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class FormCrearUsuario extends React.Component {
       console.log(usuario);
       // Establezco usuario en el estado 
       // ya que lo logueo cuando se registra
-      instancearUsuario(usuario);
+      store.dispatch(ingresar_usuario(usuario));
     })
   }
 

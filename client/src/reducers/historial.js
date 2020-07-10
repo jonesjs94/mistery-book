@@ -1,12 +1,12 @@
 import {
-  ESTABLECER_HISTORIAL,
+  INGRESAR_USUARIO,
   AGREGAR_A_HISTORIAL
 } from './../actions/actionTypes';
 
 export default function historial(state = {}, action) {
   switch (action.type) {
-    case ESTABLECER_HISTORIAL:
-      return action.payload;
+    case INGRESAR_USUARIO:
+      return action.payload.history;
     case AGREGAR_A_HISTORIAL:
       // Key con el que se va a guardar la historia.
       // Tomo el último Key del estado si es que existe y le sumo 1, sino 
