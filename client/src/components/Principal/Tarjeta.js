@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// Bootstrap
+// Bootstrap 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 

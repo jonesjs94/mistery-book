@@ -18,8 +18,8 @@ router.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
   const newUser = new User({
     username: req.body.username,
     password: hashedPass,
-    favorites: {},
-    history: {}
+    favorites: [],
+    history: []
   });
   
   // Crea usuario nuevo

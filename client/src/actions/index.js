@@ -64,19 +64,25 @@ export const busca_recetas = consulta => {
 
 const guarda_busqueda = (consulta, recetario) => {
   const estado = store.getState();
-  const historia = {
-    consulta,
-    recetario,
-    fecha: new Date()
-  }
+  const idRecetas = recetario.map(receta => { return receta.id })
+  
+  const historia = { 
+      consulta,
+      recetario: idRecetas,
+      fecha: new Date()
+  } 
 
   store.dispatch(agrega_a_historial(historia));
 
   // ---- Si hay usuario en sesión, almaceno búsqueda en la DB ----
   const usuarioActivo = estado.usuario;
   if (usuarioActivo) {
+    const cabecera = new Headers();
+    cabecera.set("Content-Type", "application/json");
+    
     fetch('/history', {
       method: 'POST',
+      headers: cabecera,
       body: JSON.stringify(historia)
     })
     .then(respuesta => respuesta.json())

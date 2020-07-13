@@ -44,8 +44,8 @@ export default class Navegador extends React.Component {
           <Nav>
             <Nav.Link href="https://www.linkedin.com/in/jonathan-guerreiro/" target="_blank">Linkedin</Nav.Link>
             <Nav.Link href="https://www.github.com/jonesjs94" target="_blank">Github</Nav.Link>
-            {/* <Nav.Link as={Link} to="/muestra">Muestra</Nav.Link>
-            <Nav.Link as={Link} to="/favoritos">Favoritos</Nav.Link> */}
+            <Nav.Link as={Link} to="/historial">Historial</Nav.Link>
+            <Nav.Link as={Link} to="/favoritos">Favoritos</Nav.Link>
           </Nav>
 
           <Nav className="ml-auto">
