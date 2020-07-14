@@ -17,22 +17,15 @@ export default class Navegador extends React.Component {
     super(props);
     this.state = {
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleSubmit(e) {
+  handleLogout(e) {
     e.preventDefault();
-    const cabecera = new Headers();
-    cabecera.set("Content-Type", "application/json");
-
-    fetch('/signup', {
-      method: 'POST',
-      headers: cabecera,
-      body: JSON.stringify(this.state)
-    })
-    .then(response => response.text())
-    .then(info => console.log(info))
+    fetch("/logout")
+    .then(response => response.json())
+    .then(message => console.log(message.response))
+    .catch(error => console.error);
   }
   
   render() {
@@ -49,6 +42,9 @@ export default class Navegador extends React.Component {
           </Nav>
 
           <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+          </Nav.Item>
             <Nav.Item>
               <Tippy
               trigger="click"

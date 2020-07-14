@@ -35,7 +35,13 @@ router.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
       if(err) return next(err);
       res.send(user);
     });
-  })
+  });
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  console.log("Logout");
+  res.send({response: "Logout successfull."});
 })
 
 module.exports = router;

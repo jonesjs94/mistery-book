@@ -35,15 +35,15 @@ export default class Principal extends React.Component {
   }
 
   mostrar() {
-    const state = store.getState();
-    console.log(state)
-    // const receta = state.recetario.find( (receta => receta.id)
+    const estado = store.getState();
+    console.log(estado)
+    // const receta = estado.recetario.find( (receta => receta.id)
   }
   
   render() {
-    const state = store.getState();
+    const estado = store.getState();
 
-    const recetario = state.recetario;
+    const recetario = estado.recetario;
     const recetas = []; // lista vacía para construir componentes con recetas
     const hayRecetas = recetario.length; // booleano para saber si hay recetas
 

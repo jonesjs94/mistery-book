@@ -6,17 +6,23 @@ import Col from 'react-bootstrap/Col';
 import Tarjeta from './Tarjeta';
 
 export default function Historia(props) {
+  const recetas = props.recetario.map(receta => {
+    return (
+      <Tarjeta
+        key={receta.id}
+        nombre={receta.nombre}
+        imagen={receta.imagen}
+      />
+    )
+  })
+  
   return (
       <Row>
-        <Col xs={12}><h2>Consulta</h2></Col>
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
-        <Tarjeta />
+        <Col xs={6}>
+          <h2>{props.consulta}</h2>
+          <p>{props.fecha}</p>
+        </Col>
+        {recetas}
       </Row>
   )
 }

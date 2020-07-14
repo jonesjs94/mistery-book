@@ -6,6 +6,10 @@ import {
   AGREGA_A_HISTORIAL
 } from './actionTypes';
 import { store } from '../store';
+// Librería para manejar el objeto Date
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
 
 export const ingresa_usuario =(usuario) => ({
   type: INGRESA_USUARIO,
@@ -49,13 +53,16 @@ export const busca_recetas = consulta => {
     })
     .then(recetario => {
       console.log(`Recetas obtenidas.`);
-
-      // Despacha objeto de historia al estado y a la DB si existe un usuario
-      guarda_busqueda(consulta, recetario.recipes);
+      if (recetario.recipes.length) {
+        // Despacha objeto de historia al estado y a la DB si existe un usuario
+        guarda_busqueda(consulta, recetario.recipes);
       
-      // Despacha consulta, recetas e historia al estado
-      dispatch(establece_consulta(consulta)); 
-      dispatch(establece_recetario(recetario.recipes));
+        // Despacha consulta, recetas e historia al estado
+        dispatch(establece_consulta(consulta)); 
+        dispatch(establece_recetario(recetario.recipes));
+      } else {
+        console.log("No hay receta con esa consulta.")
+      }
     })
     .catch((e) => console.error(e))
   }
@@ -64,12 +71,20 @@ export const busca_recetas = consulta => {
 
 const guarda_busqueda = (consulta, recetario) => {
   const estado = store.getState();
-  const idRecetas = recetario.map(receta => { return receta.id })
+  const recetas = recetario.map(receta => {
+    const datos = {
+      nombre: receta.title,
+      imagen: receta.image,
+      id: receta.id
+    }
+    return datos
+  })
+  let fecha = moment().format("h:mm a, D [de] MMMM YYYY");
   
   const historia = { 
       consulta,
-      recetario: idRecetas,
-      fecha: new Date()
+      recetario: recetas,
+      fecha
   } 
 
   store.dispatch(agrega_a_historial(historia));
