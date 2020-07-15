@@ -12,13 +12,14 @@ export default function Historia(props) {
         key={receta.id}
         nombre={receta.nombre}
         imagen={receta.imagen}
+        id={receta.id}
       />
     )
   })
   
   return (
       <Row>
-        <Col xs={6}>
+        <Col xs={12}>
           <h2>{props.consulta}</h2>
           <p>{props.fecha}</p>
         </Col>

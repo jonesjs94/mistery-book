@@ -18,7 +18,7 @@ export default function App() {
       <Navegador />
       <Switch>
         <Route exact path="/" component={Principal} />
-        <Route exact path="/receta" component={Receta} />
+        <Route exact path="/receta/:id" component={Receta} />
         <Route exact path="/signup" component={FormCrearUsuario} />
         <Route exact path="/historial" component={Historial} />
       </Switch>  
