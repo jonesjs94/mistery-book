@@ -8,9 +8,8 @@ import Tarjeta from './Tarjeta';
 export default function Historia(props) {
   const recetas = props.recetario.map(receta => {
     return (
-      <Col>
+      <Col key={receta.id}>
         <Tarjeta
-          key={receta.id}
           nombre={receta.nombre}
           imagen={receta.imagen}
           id={receta.id}

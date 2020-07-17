@@ -1,14 +1,15 @@
 import React from 'react';
-import { store } from '../store';
+import { connect } from 'react-redux';
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 // APP 
 import Historia from './Historia';
 
-export default function Historial(props) {
-  const estado = store.getState();
-  
-  const historial = estado.historial;
+const mapStateToProps = state => {
+  return { historial: state.historial };
+}
+
+const ConnectedHistorial = ({ historial }) => {
   const contenido = historial.map((historia, i) => {
     return (
       <Historia 
@@ -26,3 +27,7 @@ export default function Historial(props) {
     </Container>
   )
 }
+
+const Historial = connect(mapStateToProps)(ConnectedHistorial);
+
+export default Historial;

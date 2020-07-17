@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { busca_recetas } from '../actions';
 import '../containers/style.css';
 // Bootstrap 
 import Container from 'react-bootstrap/Container';
@@ -8,11 +10,18 @@ import Col from 'react-bootstrap/Col';
 import Tarjeta from '../components/Tarjeta';
 import Buscador from './Buscador';
 import Cargador from '../components/Cargador';
-// Redux
-import { store } from '../store';
-import { busca_recetas } from '../actions';
 
-export default class Recetario extends React.Component {
+const mapStateToProps = state => {
+  return { state }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    busca_recetas: consulta => dispatch(busca_recetas(consulta))
+  }
+}
+
+class ConnectedRecetario extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,22 +33,21 @@ export default class Recetario extends React.Component {
   handleSubmit(consulta) {
     // Despliego Icono de carga 
     this.setState({ cargando: true }, () => {
-        store.dispatch(busca_recetas(consulta));
-        this.setState({ cargando: false })
+        // Dispatch
+        this.props.busca_recetas(consulta);
+        this.setState({ cargando: false });
     })
   }
 
   mostrar() {
-    console.log(store.getState())
+    console.log(this.props.state)
   }
   
   render() {
-    const estado = store.getState();
-
-    const recetario = estado.recetario;
+    const recetario = this.props.state.recetario;
     const recetas = []; // lista vacía para construir componentes con recetas
     const hayRecetas = recetario.length; // booleano para saber si hay recetas
-    
+
     if (hayRecetas) {
       recetario.forEach(receta => {
         recetas.push(
@@ -68,5 +76,7 @@ export default class Recetario extends React.Component {
   }
 }
 
+const Recetario = connect(mapStateToProps, mapDispatchToProps)(ConnectedRecetario);
 
+export default Recetario;
 

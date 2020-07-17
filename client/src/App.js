@@ -6,11 +6,11 @@ import {
 } from "react-router-dom";
 
 // App
-import Recetario from '../containers/Recetario';
-import Receta from '../containers/Receta';
-import Navegador from './Navegador';
-import FormCrearUsuario from '../containers/FormEntrar';
-import Historial from './Historial';
+import Recetario from './containers/Recetario';
+import Receta from './containers/Receta';
+import Navegador from './components/Navegador';
+import FormCrearUsuario from './containers/FormEntrar';
+import Historial from './components/Historial';
 
 
 export default function App() {
