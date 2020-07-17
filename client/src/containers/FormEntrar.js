@@ -1,16 +1,17 @@
 import React from 'react';
-// Bootstrap
+// Componentes Bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// Actions
-import { ingresa_usuario } from '../../../../actions'; 
-import { store } from '../../../../store';
+// Acciones
+import { ingresa_usuario } from '../actions';
+// Store
+import { store } from '../store';
 
-class FormIngresarUsuario extends React.Component {
+class FormEntrar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'login',
+      url: 'signup',
       username: '',
       password: ''
     }
@@ -27,51 +28,49 @@ class FormIngresarUsuario extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    
     const cabecera = new Headers();
     cabecera.set("Content-Type", "application/json");
 
-    fetch('/login', {
+    // Envío información del usuario nuevo
+    fetch('/signup', {
       method: 'POST',
       headers: cabecera,
       body: JSON.stringify(this.state)
     })
     .then(respuesta => respuesta.json())
     .then(usuario => {
-      console.log(usuario)
-      // Establezco usuario en el estado 
-      store.dispatch(ingresa_usuario(usuario))
+      // Despacho usuario al estado 
+      store.dispatch(ingresa_usuario(usuario));
+      console.log(usuario);
     })
-
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} className="ingresar">
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control 
-            onChange={this.handleChange}
-            value={this.state.username}
-            name="username"
+            value={this.state.username} 
+            onChange={this.handleChange} 
+            name="username" 
             type="text" 
-            placeholder="Enter username ..."   
           />
         </Form.Group>
         <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control 
-            onChange={this.handleChange}
-            value={this.state.password}
-            name="password"
+            value={this.state.password} 
+            onChange={this.handleChange} 
+            name="password" 
             type="password" 
-            placeholder="Enter password ..."
           />
         </Form.Group>
-        <Button type="submit" variant="secondary" block>Login</Button>    
+        <Button type="submit" variant="success" block>Create Account</Button>
       </Form>
     )
   }
+
 }
 
-export default FormIngresarUsuario;
+export default FormEntrar;

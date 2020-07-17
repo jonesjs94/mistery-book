@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 // CSS
-import '../../style.css';
+import '../containers/style.css';
 // Componentes Bootstrap
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 // Componentes
-import FormIngresarUsuario from './Usuario/Ingresar';
+import FormRegistrar from '../containers/FormRegistrar';
 
 
 export default class Navegador extends React.Component {
@@ -50,7 +50,7 @@ export default class Navegador extends React.Component {
               trigger="click"
               interactive={true}
               render={attrs => (
-                <FormIngresarUsuario />
+                <FormRegistrar />
               )}>
               <Button variant="dark">Login</Button>
               </Tippy>

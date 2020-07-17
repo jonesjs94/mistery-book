@@ -1,18 +1,18 @@
 import React from 'react';
-import '../../style.css';
+import '../containers/style.css';
 // Bootstrap 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // App
-import Tarjeta from './Tarjeta';
+import Tarjeta from '../components/Tarjeta';
 import Buscador from './Buscador';
-import Cargador from './Cargador';
+import Cargador from '../components/Cargador';
 // Redux
-import { store } from '../../store';
-import { busca_recetas } from '../../actions';
+import { store } from '../store';
+import { busca_recetas } from '../actions';
 
-export default class Principal extends React.Component {
+export default class Recetario extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -29,15 +29,8 @@ export default class Principal extends React.Component {
     })
   }
 
-  abrirReceta(idReceta) {
-    console.log(idReceta);
-    // store.dispatch(establecerReceta())
-  }
-
   mostrar() {
-    const estado = store.getState();
-    console.log(estado)
-    // const receta = estado.recetario.find( (receta => receta.id)
+    console.log(store.getState())
   }
   
   render() {
@@ -46,7 +39,7 @@ export default class Principal extends React.Component {
     const recetario = estado.recetario;
     const recetas = []; // lista vacía para construir componentes con recetas
     const hayRecetas = recetario.length; // booleano para saber si hay recetas
-
+    
     if (hayRecetas) {
       recetario.forEach(receta => {
         recetas.push(
@@ -54,14 +47,13 @@ export default class Principal extends React.Component {
             <Tarjeta
               nombre={receta.title}
               imagen={receta.image}
-              abrirReceta={this.abrirReceta}
+              id={receta.id}
             />
           </Col>
         )
       })
     }
     const contenido = this.state.cargando ? <Cargador /> : recetas;
-
     return (
       <>
         <Buscador onSubmit={this.handleSubmit}></Buscador>

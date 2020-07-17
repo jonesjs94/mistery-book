@@ -5,24 +5,25 @@ import {
   Route
 } from "react-router-dom";
 
-import Principal from './Principal';
-import Receta from './Principal/Receta';
+// App
+import Recetario from '../containers/Recetario';
+import Receta from '../containers/Receta';
 import Navegador from './Navegador';
-import FormCrearUsuario from './Navegador/Usuario/Crear';
-import Historial from './Navegador/Historial';
+import FormCrearUsuario from '../containers/FormEntrar';
+import Historial from './Historial';
 
 
 export default function App() {
   return (
-    <Router>
-      <Navegador />
-      <Switch>
-        <Route exact path="/" component={Principal} />
-        <Route exact path="/receta/:id" component={Receta} />
-        <Route exact path="/signup" component={FormCrearUsuario} />
-        <Route exact path="/historial" component={Historial} />
-      </Switch>  
-    </Router>
+      <Router>
+        <Navegador />
+        <Switch>
+          <Route exact path="/" component={Recetario} />
+          <Route exact path="/receta/:id" component={Receta} />
+          <Route exact path="/signup" component={FormCrearUsuario} />
+          <Route exact path="/historial" component={Historial} />
+        </Switch>  
+      </Router>
   )
 }
 

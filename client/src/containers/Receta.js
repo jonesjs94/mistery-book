@@ -1,5 +1,4 @@
 import React from 'react';
-import './receta.css';
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 // import Row from 'react-bootstrap/Row';
@@ -11,9 +10,9 @@ export default class Receta extends React.Component {
 
   }
 
-  componentDidMount() {
-    
-  }
+  // componentDidMount() {
+  //   fetch("https://api.spoonacular.com/recipes/716429/information?apiKey=")
+  // }
 
   render() {
     return (

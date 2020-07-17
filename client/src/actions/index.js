@@ -56,7 +56,7 @@ export const busca_recetas = consulta => {
       if (recetario.recipes.length) {
         // Despacha objeto de historia al estado y a la DB si existe un usuario
         guarda_busqueda(consulta, recetario.recipes);
-      
+        
         // Despacha consulta, recetas e historia al estado
         dispatch(establece_consulta(consulta)); 
         dispatch(establece_recetario(recetario.recipes));
