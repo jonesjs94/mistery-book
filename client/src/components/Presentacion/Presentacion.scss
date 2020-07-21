@@ -1,0 +1,11 @@
+$nav-height: 170px;
+
+.presentacion {
+  height: calc(100vh - nav-height);
+}
+
+.presentacion__btn {
+  padding: 10px;
+  color: #EDF5E1;
+  background-color: #05386B;
+}

@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // App
+import Presentacion from '../components/Presentacion/Presentacion';
 import Tarjeta from '../components/Tarjeta';
 import Buscador from './Buscador';
 import Cargador from '../components/Cargador';
@@ -21,13 +22,14 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class ConnectedRecetario extends React.Component {
+class Recetario extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       cargando: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.mostrarEstado = this.mostrarEstado.bind(this);
   }
 
   handleSubmit(consulta) {
@@ -39,7 +41,7 @@ class ConnectedRecetario extends React.Component {
     })
   }
 
-  mostrar() {
+  mostrarEstado() {
     console.log(this.props.state)
   }
   
@@ -64,7 +66,8 @@ class ConnectedRecetario extends React.Component {
     const contenido = this.state.cargando ? <Cargador /> : recetas;
     return (
       <>
-        <Buscador onSubmit={this.handleSubmit}></Buscador>
+        <Presentacion />
+        <Buscador onSubmit={this.handleSubmit} />
         <button onClick={this.mostrar}>Mostrar</button>
         <Container className="recetario" fluid>
           <Row>
@@ -76,7 +79,7 @@ class ConnectedRecetario extends React.Component {
   }
 }
 
-const Recetario = connect(mapStateToProps, mapDispatchToProps)(ConnectedRecetario);
-
-export default Recetario;
-
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps)
+  (Recetario);

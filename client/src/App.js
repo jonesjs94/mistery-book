@@ -8,7 +8,7 @@ import {
 // App
 import Recetario from './containers/Recetario';
 import Receta from './containers/Receta';
-import Navegador from './components/Navegador';
+import Navegador from './components/Navegador/Navegador';
 import FormCrearUsuario from './containers/FormEntrar';
 import Historial from './components/Historial';
 
