@@ -1,17 +1,17 @@
 $tablet: 768px;
 
-.menu {
+.icono {
   display: none;
 }
 
 @media screen and (max-width: $tablet) {
-  .menu {
+  .icono {
     display: block;
     position: fixed;
-    height: 3rem;
-    width: 3rem;
-    top: 3rem;
-    right: 3rem;
+    height: 2rem;
+    width: 2rem;
+    top: 1.2rem;
+    right: 1.5rem;
     z-index: 999;
     cursor: pointer;
   }
@@ -34,16 +34,17 @@ $tablet: 768px;
   }
 
   .bar::before {
-    top: -1.2rem;
+    top: -.75rem;
   }
 
   .bar::after {
-    top: 1.2rem;
+    top: .75rem;
   }
 
   .bar::before,
   .bar::after {
     transform: rotate(0deg);
+    transition: transform .2s linear;
   }
 
   .activo .bar {

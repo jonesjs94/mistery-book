@@ -16,8 +16,10 @@ export default class Navegador extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      menuAbierto: false
     };
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
   }
 
   handleLogout(e) {
@@ -27,31 +29,36 @@ export default class Navegador extends React.Component {
     .then(message => console.log(message.response))
     .catch(error => console.error);
   }
+
+  handleNavMenuToggle() {
+    const estadoActual = this.state.menuAbierto;
+    this.setState({ menuAbierto: !estadoActual });
+  }
   
   render() {
     return (
-      <nav className="navbar">
+      <header>
+        <MenuHamburguesa onClick={this.handleNavMenuToggle} className={this.state.menuAbierto ? 'activo' : '' } />
         <Logo />  
-        <MenuHamburguesa />
         
-        <ul className="navbar__lista">
-          <li className="navbar__item">
-            <Link className="navbar__enlace" to="/historial">History</Link>
+        <ul className={this.state.menuAbierto ? 'menu menu-abierto' : 'menu'}>
+          <li className="menu__item">
+            <Link className="menu__enlace" to="/historial">History</Link>
           </li>
-          <li className="navbar__item">
-            <Link className="navbar__enlace" to="/favoritos">Favorites</Link>
+          <li className="menu__item">
+            <Link className="menu__enlace" to="/favoritos">Favorites</Link>
           </li>
-          <li className="navbar__item">
-            <Link className="navbar__enlace resaltado" to="/recetario">Discover</Link>
+          <li className="menu__item">
+            <Link className="menu__enlace resaltado" to="/recetario">Discover</Link>
           </li>
-          <li className="navbar__item">
-            <Link className="navbar__enlace" to="/recetario">User</Link>
+          <li className="menu__item">
+            <Link className="menu__enlace" to="/recetario">User</Link>
           </li>
-          <li className="navbar__item">
-            <Link className="navbar__enlace" to="/favoritos">Contact</Link>
+          <li className="menu__item">
+            <Link className="menu__enlace" to="/favoritos">Contact</Link>
           </li>
-        </ul>           
-      </nav>
+        </ul>
+      </header>
     )
   }
 }

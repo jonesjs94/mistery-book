@@ -11,3 +11,12 @@
   color: #fc5185;
   margin: 5px 0;
 }
+
+$tablet: 768px;
+@media screen and (max-width: $tablet) {
+  .logo {
+    font-size: 2rem;
+    text-align: start;
+    margin-left: 1rem;
+  }
+}
