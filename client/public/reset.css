@@ -24,9 +24,14 @@ li {
   margin: 0;
 }
 
+/* Set default height and width */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
 /* Set core body defaults */
-body, #root {
-  min-height: 100vh;
+body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;

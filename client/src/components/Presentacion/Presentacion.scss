@@ -1,7 +1,8 @@
-$nav-height: 12rem;
+// Variables de SASS
+@import '../../utilities/variables';
 
 .presentacion {
-  height: calc(100vh );
+  height: calc(100% - #{$altura_nav});
 }
 
 .presentacion__btn {
