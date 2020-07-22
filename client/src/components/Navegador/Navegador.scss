@@ -1,15 +1,18 @@
 $blue: #364f6b;
 $pink: #fc5185;
 $background-color: #f5f5f5;
-
-$nav-height: 2ren;
-$height-viewport: calc(100% - $nav-height);
+$nav_height: 12rem;
+$viewport_height: calc(100% - $nav_height);
+// Variables para Dispositivos móbiles
+$tablet: 768px;
+$nav_height_mobile: 7.5vh;
+$viewport_height_mobile: calc(100% - $nav_height);
 
 header {
   position: sticky;
   top: 0;
   width: 100%;
-  height: $nav-height;
+  height: $nav_height;
   background-color: $background-color;
   overflow: hidden;
   font-size: 1.4rem;
@@ -19,7 +22,6 @@ header {
   display: flex;
   justify-content: center;
   min-width: 200px;
-  height: $nav-height;
   background: $background-color;
 
   &__item {
@@ -70,15 +72,15 @@ header {
 
 
 
-$tablet: 768px;
+
 @media screen and (max-width: $tablet) {
   header {
     position: fixed;
-    height: 7vh;
+    height: $nav_height_mobile;
   }
 
   body {
-    padding-top: 7vh;
+    padding-top: $nav_height_mobile;
   }
   
   .menu {
@@ -91,7 +93,7 @@ $tablet: 768px;
     background-color: $background-color;
     transform: translateX(-50rem);
     z-index: 998;
-    transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: transform .5s cubic-bezier(0.23, 1, 0.320, 1);
 
 
     &__item:nth-child(1) { order: 2 } // History
