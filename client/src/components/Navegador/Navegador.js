@@ -18,6 +18,7 @@ export default class Navegador extends React.Component {
     this.state = {
       menuAbierto: false
     };
+    this.listener = null;
     this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
   }
@@ -34,22 +35,49 @@ export default class Navegador extends React.Component {
     const estadoActual = this.state.menuAbierto;
     this.setState({ menuAbierto: !estadoActual });
   }
+
+  componentDidMount() {
+    this.setState({NavbarEnTop: true})
+    
+    this.listener = document.addEventListener('scroll', e => {
+      let scroll = document.scrollingElement.scrollTop;
+      // Chequea si el scroll se desplaza más allá de los 50px.
+      // Los IF internos van a evitar que se actualice el estado constantemente.
+      if (scroll > 50) {
+        if(this.state.NavbarEnTop) 
+          this.setState({ NavbarEnTop: false }); // Navegador fuera de top
+      } 
+      else {
+        if(!this.state.NavbarEnTop) 
+          this.setState({ NavbarEnTop: true }); // Navegador en top
+      }
+    })
+  }
+  
+  componentDidUpdate() {
+    document.removeEventListener("scroll", this.listener);
+  }
   
   render() {
+    let classNav = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
+    let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
     return (
-      <header>
-        <MenuHamburguesa onClick={this.handleNavMenuToggle} className={this.state.menuAbierto ? 'activo' : '' } />
-        <Logo />  
+      <header className={classNav}>
+        <MenuHamburguesa 
+          onClick={this.handleNavMenuToggle} 
+          menuAbierto={this.state.menuAbierto} 
+        />
+        <Logo estadoNavbar={this.state.NavbarEnTop} />  
         
-        <ul className={this.state.menuAbierto ? 'menu menu-abierto' : 'menu'}>
+        <ul className={classMenu}>
+          <li className="menu__item">
+            <Link className="menu__enlace resaltado" to="/recetario">Discover</Link>
+          </li>
           <li className="menu__item">
             <Link className="menu__enlace" to="/historial">History</Link>
           </li>
           <li className="menu__item">
             <Link className="menu__enlace" to="/favoritos">Favorites</Link>
-          </li>
-          <li className="menu__item">
-            <Link className="menu__enlace resaltado" to="/recetario">Discover</Link>
           </li>
           <li className="menu__item">
             <Link className="menu__enlace" to="/recetario">User</Link>

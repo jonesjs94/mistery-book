@@ -1,4 +1,5 @@
-$tablet: 768px;
+// SASS
+@import '../../utilities/variables';
 
 .icono {
   display: none;
@@ -10,7 +11,7 @@ $tablet: 768px;
     position: fixed;
     height: 2rem;
     width: 2rem;
-    top: .8rem;
+    top: 1rem;
     right: 1.5rem;
     z-index: 999;
     cursor: pointer;
@@ -23,7 +24,7 @@ $tablet: 768px;
     position: absolute;
     top: 50%;
     left: 0;
-    background-color: #000;
+    background-color: $blanco;
     margin: auto;
     width: 100%;
     height: 3px;

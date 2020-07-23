@@ -1,22 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
 .logo {    
   display: flex;
-  justify-content: center;
+  color: $blanco;
   flex-direction: column;
-  font-family: 'Playfair Display', serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 65px;
-  text-align: center;
-  color: #fc5185;
-  margin: 5px 0;
+  justify-content: center;
+  margin-left: 10px;
+  font-size: 3rem;
+  transition: all .2s linear;
+
+  &--scroll {
+    font-size: 2rem;
+  }
 }
 
-$tablet: 768px;
+/*
+  Breakpoint tablet - 768px
+*/
 @media screen and (max-width: $tablet) {
   .logo {
     font-size: 2rem;
-    text-align: start;
     margin-left: 1rem;
   }
 }

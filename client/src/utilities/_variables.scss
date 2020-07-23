@@ -1,8 +1,22 @@
-$azul: #364f6b;
-$rosa: #fc5185;
-$color_contenedor: #f5f5f5;
-$altura_nav: 12rem;
 
-// Variables para Dispositivos móbiles
+$azul: #364f6b;
+$celeste: #3fc1c9;
+$rosa: #fc5185;
+$blanco: #f5f5f5;
+$altura_nav: 7rem;
+
+/*
+  Variables para Dispositivos móbiles
+*/
+// Notebook - 992px
+$notebook: 992px;
+
+// Tablet - 768px
 $tablet: 768px;
-$altura_nav_tablet: 7.5vh;
+$altura_nav_tablet: 4rem;
+
+
+$rojo: #db3830;
+$rojo_oscuro: #da3028;
+$naranja: #e76f35;
+$amarillo: #f3cb38;

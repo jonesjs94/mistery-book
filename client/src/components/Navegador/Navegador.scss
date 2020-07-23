@@ -1,42 +1,54 @@
-// Variables de SASS
-@import '../../utilities/_variables';
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
 
-header {
-  position: sticky;
+.navbar {
+  position: fixed;
   top: 0;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Alegreya Sans', sans;
   width: 100%;
   height: $altura_nav;
-  background-color: $color_contenedor;
+  background-color: $rojo;
+  color: $blanco;
   overflow: hidden;
-  font-size: 1.4rem;
+  z-index: 999;
+  transition: all .2s linear;
+
+  &--scroll {
+    height: calc(#{$altura_nav} - 2rem);
+    transition: all .2s linear;
+  }
 }
 
 .menu {
   display: flex;
   justify-content: center;
   min-width: 200px;
-  background: $color_contenedor;
 
+  &--scrol {
+    font-size: 5rem;;
+  }
+  
   &__item {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 10px;
+    padding:0 10px;
   }
 
   &__enlace {
-    position: relative;
     display: inline-block;
-    color: $azul;
+    position: relative;
+    color: $blanco;
+    font-size: 1.5rem;
     text-decoration: none;
-    -webkit-transition: color 0.25s;
     transition: color 0.25s;
     line-height: 1.4;
-    padding-top: 8px;
-    padding-bottom: 8px;
     padding-left: 20px;
     padding-right: 20px;
-
+    
     &:hover {
       color: #fc5185;
     }
@@ -46,7 +58,7 @@ header {
       content: '';
       left: 50%;
       right: 50%;
-      bottom: 8px;
+      bottom: 0;
       height: 2px;
       background-color: #fc5185;
       transition: left 0.25s, right 0.25s;
@@ -59,16 +71,20 @@ header {
   }
 }
 
-.resaltado {
-  font-size: 150%;
+@media screen and (max-width: $notebook) {
+  .menu {
+    &__item {
+      padding: initial;
+    }
+
+    &__enlace {
+      font-size: 1.2rem;
+    }
+  }
 }
 
-
-
-
 @media screen and (max-width: $tablet) {
-  header {
-    position: fixed;
+  .navbar {
     height: $altura_nav_tablet;
   }
 
@@ -83,20 +99,18 @@ header {
     justify-content: flex-start;
     width: 100%;
     height: 100vh;
-    background-color: $color_contenedor;
+    padding-top: 15vh !important;
+    background-color: $rojo;
     transform: translateX(-50rem);
     z-index: 998;
     transition: transform .5s cubic-bezier(0.23, 1, 0.320, 1);
 
-
-    &__item:nth-child(1) { order: 2 } // History
-    &__item:nth-child(2) { order: 3 } // Favorites
-    &__item:nth-child(3) { order: 1 } // Discover 
-    &__item:nth-child(4) { order: 0 } // User
-    &__item:nth-child(5) { order: 4 } // Contact
-
+    &__item {
+      padding: 2rem 0;
+    }
+    
     &__enlace {
-      font-size: 2rem;
+      font-size: 2.5rem;
       text-align: center;
 
       &:hover::after {
@@ -109,10 +123,6 @@ header {
 
   .menu-abierto {
     transform: translateX(0);
-  }
-
-  .resaltado {
-    color: $rosa;
   }
 
 }
