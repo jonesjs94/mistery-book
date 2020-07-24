@@ -71,7 +71,7 @@ export default class Navegador extends React.Component {
         
         <ul className={classMenu}>
           <li className="menu__item">
-            <Link className="menu__enlace resaltado" to="/recetario">Discover</Link>
+            <Link className="menu__enlace resaltado" to="/discover">Discover</Link>
           </li>
           <li className="menu__item">
             <Link className="menu__enlace" to="/historial">History</Link>

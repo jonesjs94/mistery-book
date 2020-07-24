@@ -32,14 +32,13 @@
   }
   
   &__item {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     padding:0 10px;
   }
 
   &__enlace {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     position: relative;
     color: $blanco;
     font-size: 1.5rem;
@@ -48,9 +47,10 @@
     line-height: 1.4;
     padding-left: 20px;
     padding-right: 20px;
+    height: 100%;
     
     &:hover {
-      color: #fc5185;
+      color: #000;
     }
 
     &:after {
@@ -60,7 +60,7 @@
       right: 50%;
       bottom: 0;
       height: 2px;
-      background-color: #fc5185;
+      background-color: #000;
       transition: left 0.25s, right 0.25s;
     }
 

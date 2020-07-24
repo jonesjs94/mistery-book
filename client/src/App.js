@@ -11,6 +11,7 @@ import Receta from './containers/Receta';
 import Navegador from './components/Navegador/Navegador';
 import FormCrearUsuario from './containers/FormEntrar';
 import Historial from './components/Historial';
+import Presentacion from './components/Presentacion/Presentacion';
 
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
       <Router>
         <Navegador />
         <Switch>
-          <Route exact path="/" component={Recetario} />
+          <Route exact path="/" component={Presentacion} />
+          <Route exact path="/discover" component={Recetario} />
           <Route exact path="/receta/:id" component={Receta} />
           <Route exact path="/signup" component={FormCrearUsuario} />
           <Route exact path="/historial" component={Historial} />

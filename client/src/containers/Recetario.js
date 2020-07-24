@@ -66,7 +66,6 @@ class Recetario extends React.Component {
     const contenido = this.state.cargando ? <Cargador /> : recetas;
     return (
       <>
-        <Presentacion />
         <Buscador onSubmit={this.handleSubmit} />
         <button onClick={this.mostrar}>Mostrar</button>
         <Container className="recetario" fluid>
