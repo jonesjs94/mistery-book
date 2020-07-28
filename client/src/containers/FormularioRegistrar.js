@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { buscarUsuario } from '../actions'
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 
 
 const mapStateToProps = state => {
@@ -41,29 +39,29 @@ class FormularioRegistrar extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} className="ingresar">
-        <Form.Group>
-          <Form.Label>Username</Form.Label>
-          <Form.Control 
-            onChange={this.handleChange}
-            value={this.state.username}
-            name="username"
-            type="text" 
-            placeholder="Enter username ..."   
+      <form onSubmit={this.handleSubmit}>
+        <div>
+          <label>Username</label>
+          <input 
+            value={this.state.username} 
+            onChange={this.handleChange} 
+            name="username" 
+            type="text"
+            placeholder="John@example.com"
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            onChange={this.handleChange}
-            value={this.state.password}
-            name="password"
-            type="password" 
-            placeholder="Enter password ..."
+        </div>
+        <div>
+          <label>Password</label>
+          <input 
+            value={this.state.password} 
+            onChange={this.handleChange} 
+            name="password" 
+            type="password"
+            placeholder="Enter your password"
           />
-        </Form.Group>
-        <Button type="submit" variant="secondary" block>Login</Button>    
-      </Form>
+        </div>
+        <button className="btn" type="submit">Create Account</button>
+      </form>
     )
   }
 }

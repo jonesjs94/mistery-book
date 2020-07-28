@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Buscador.scss';
-import { CSS } from 'css.gg';
 
-// Bootstrap 
-import Form from 'react-bootstrap/Form';
 
 const mapStateToProps = state => {
   return state;

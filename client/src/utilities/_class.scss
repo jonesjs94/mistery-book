@@ -1,0 +1,17 @@
+
+.btn {
+  font-family: 'Permanent Marker', serif;
+  margin: 1rem auto;
+  padding: .75rem 3rem;
+  color: #000;
+  background-color: $amarillo;
+  text-decoration: none;
+  border: transparent;
+  transition: all .1s linear;
+
+  &:hover {
+    background-color: $naranja;
+    color: $blanco;
+    cursor: pointer;
+  }
+}

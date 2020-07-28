@@ -38,11 +38,6 @@ body {
   font-size: 62.5%;
 }
 
-/* Set focus for all */
-*:focus {
-  outline: 1px solid black;
-}
-
 /* Remove list styles on ul, ol elements with a class attribute */
 ul[class],
 ol[class] {
