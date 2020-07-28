@@ -1,16 +1,25 @@
 import React from 'react';
-// Bootstrap
+import { connect } from 'react-redux';
+import { buscarUsuario } from '../actions'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// Actions
-import { ingresa_usuario } from '../actions'; 
-import { store } from '../store';
 
-class FormRegistrar extends React.Component {
+
+const mapStateToProps = state => {
+  return state.usuario;
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    buscarUsuario: usuario => dispatch(buscarUsuario(usuario))
+  }
+}
+
+class FormularioRegistrar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'login',
+      url: '/signup',
       username: '',
       password: ''
     }
@@ -27,22 +36,7 @@ class FormRegistrar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    
-    const cabecera = new Headers();
-    cabecera.set("Content-Type", "application/json");
-
-    fetch('/login', {
-      method: 'POST',
-      headers: cabecera,
-      body: JSON.stringify(this.state)
-    })
-    .then(respuesta => respuesta.json())
-    .then(usuario => {
-      console.log(usuario)
-      // Establezco usuario en el estado 
-      store.dispatch(ingresa_usuario(usuario))
-    })
-
+    // this.props.buscarUsuario(this.state);
   }
 
   render() {
@@ -74,4 +68,7 @@ class FormRegistrar extends React.Component {
   }
 }
 
-export default FormRegistrar;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormularioRegistrar);

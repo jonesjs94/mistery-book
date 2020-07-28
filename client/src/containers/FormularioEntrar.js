@@ -1,17 +1,25 @@
 import React from 'react';
-// Componentes Bootstrap
+import { connect } from 'react-redux';
+import { buscarUsuario } from '../actions'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// Acciones
-import { ingresa_usuario } from '../actions';
-// Store
-import { store } from '../store';
 
-class FormEntrar extends React.Component {
+
+const mapStateToProps = state => {
+  return state.usuario;
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    buscarUsuario: usuario => dispatch(buscarUsuario(usuario))
+  }
+}
+
+class FormularioEntrar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'signup',
+      url: '/login',
       username: '',
       password: ''
     }
@@ -28,21 +36,7 @@ class FormEntrar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const cabecera = new Headers();
-    cabecera.set("Content-Type", "application/json");
-
-    // Envío información del usuario nuevo
-    fetch('/signup', {
-      method: 'POST',
-      headers: cabecera,
-      body: JSON.stringify(this.state)
-    })
-    .then(respuesta => respuesta.json())
-    .then(usuario => {
-      // Despacho usuario al estado 
-      store.dispatch(ingresa_usuario(usuario));
-      console.log(usuario);
-    })
+    this.props.buscarUsuario(this.state);
   }
 
   render() {
@@ -73,4 +67,7 @@ class FormEntrar extends React.Component {
 
 }
 
-export default FormEntrar;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormularioEntrar);

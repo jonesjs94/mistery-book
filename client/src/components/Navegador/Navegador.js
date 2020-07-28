@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Tippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css';
-// CSS
+import { connect } from 'react-redux';
 import './Navegador.scss';
-// Componentes Bootstrap
-import Button from 'react-bootstrap/Button';
-// Componentes
 import Logo from '../Logo/Logo';
 import MenuHamburguesa from '../MenuHamburguesa/MenuHamburguesa';
-import FormRegistrar from '../../containers/FormRegistrar';
 
 
-export default class Navegador extends React.Component {
+const mapStateToProps = state => {
+  return {
+    usuario: state.usuario.usuario
+  }
+}
+
+class Navegador extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,8 +59,10 @@ export default class Navegador extends React.Component {
   }
   
   render() {
-    let classNav = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
+    let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
+    let usuario   = this.props.usuario     ? this.props.usuario : 'Invitado';
+    
     return (
       <header className={classNav}>
         <MenuHamburguesa 
@@ -71,8 +73,12 @@ export default class Navegador extends React.Component {
         
         <ul className={classMenu}>
           <li className="menu__item">
-            <Link className="menu__enlace resaltado" to="/discover">Discover</Link>
+            <h1 className="menu__enlace">{usuario}</h1>
           </li>
+          <li className="menu__item">
+            <Link className="menu__enlace resaltado" to="/recipes">Recipes</Link>
+          </li>
+          
           <li className="menu__item">
             <Link className="menu__enlace" to="/historial">History</Link>
           </li>
@@ -80,7 +86,7 @@ export default class Navegador extends React.Component {
             <Link className="menu__enlace" to="/favoritos">Favorites</Link>
           </li>
           <li className="menu__item">
-            <Link className="menu__enlace" to="/recetario">User</Link>
+            <Link className="menu__enlace" to="/user">User</Link>
           </li>
           <li className="menu__item">
             <Link className="menu__enlace" to="/favoritos">Contact</Link>
@@ -91,19 +97,7 @@ export default class Navegador extends React.Component {
   }
 }
 
-  // function Invitado(props) {
-
-  // }
-
-  function Login(props) {
-    return (
-      <Tippy
-      trigger="click"
-      interactive={true}
-      render={attrs => (
-        <FormRegistrar />
-      )}>
-      <Button variant="dark">Login</Button>
-      </Tippy>
-    )
-  }
+export default connect(
+  mapStateToProps,
+  null
+)(Navegador);

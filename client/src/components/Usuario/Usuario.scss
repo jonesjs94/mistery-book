@@ -1,0 +1,30 @@
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
+.contenedor_usuario {
+  width: 100%;
+  height: 100%;
+  padding-top: $altura_nav;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__forms {
+    display: flex;
+    width: 70%;
+    height: 70%;
+    font-size: 1.5rem;
+  }
+  
+  &__login form {
+    padding: 5rem;
+    background-color: $amarillo;
+    border: 1px solid black;
+  }
+
+  &__signup form {
+    padding: 5rem;
+    border: 1px solid black;
+  }
+}

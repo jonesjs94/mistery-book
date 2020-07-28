@@ -5,11 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store';
 
-// const render = () => ReactDOM.render(<App />,document.getElementById("root"));
-// store.subscribe(render);
-
-// render();
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

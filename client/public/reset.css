@@ -35,6 +35,12 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  font-size: 62.5%;
+}
+
+/* Set focus for all */
+*:focus {
+  outline: 1px solid black;
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */

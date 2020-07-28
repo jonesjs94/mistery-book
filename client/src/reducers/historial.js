@@ -1,13 +1,13 @@
 import {
-  INGRESA_USUARIO,
-  AGREGA_A_HISTORIAL
+  BUSCAR_USUARIO_EXITO,
+  AGREGAR_HISTORIAL
 } from './../actions/actionTypes';
 
 export default function historial(state = [], action) {
   switch (action.type) {
-    case INGRESA_USUARIO:
+    case BUSCAR_USUARIO_EXITO:
       return action.payload.history.reverse();
-    case AGREGA_A_HISTORIAL:
+    case AGREGAR_HISTORIAL:
       // Key con el que se va a guardar la historia.
       // Tomo el último Key del estado si es que existe y le sumo 1, sino 
       // el Key va a ser 0 ya que no existen valores anteriores.

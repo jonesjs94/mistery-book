@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { busca_recetas } from '../actions';
-import '../containers/style.css';
+import { buscarRecetario } from '../../actions';
+import './Recetario.scss';
 // Bootstrap 
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // App
-import Presentacion from '../components/Presentacion/Presentacion';
-import Tarjeta from '../components/Tarjeta';
-import Buscador from './Buscador';
-import Cargador from '../components/Cargador';
+import Tarjeta from '../../components/Tarjeta';
+import Buscador from '../Buscador/Buscador';
+import Cargador from '../../components/Cargador';
 
 const mapStateToProps = state => {
   return { state }
@@ -18,7 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    busca_recetas: consulta => dispatch(busca_recetas(consulta))
+    buscarRecetario: consulta => dispatch(buscarRecetario(consulta))
   }
 }
 
@@ -36,7 +34,7 @@ class Recetario extends React.Component {
     // Despliego Icono de carga 
     this.setState({ cargando: true }, () => {
         // Dispatch
-        this.props.busca_recetas(consulta);
+        this.props.buscarRecetario(consulta);
         this.setState({ cargando: false });
     })
   }
@@ -63,16 +61,18 @@ class Recetario extends React.Component {
         )
       })
     }
+
     const contenido = this.state.cargando ? <Cargador /> : recetas;
+    
     return (
       <>
         <Buscador onSubmit={this.handleSubmit} />
-        <button onClick={this.mostrar}>Mostrar</button>
-        <Container className="recetario" fluid>
+        {/* <button onClick={this.mostrar}>Mostrar</button> */}
+        <div className="recetario">
           <Row>
             {contenido}
           </Row>
-        </Container>
+        </div>
       </>
     )
   }

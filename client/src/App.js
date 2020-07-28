@@ -6,13 +6,12 @@ import {
 } from "react-router-dom";
 
 // App
-import Recetario from './containers/Recetario';
+import Recetario from './containers/Recetario/Recetario';
 import Receta from './containers/Receta';
 import Navegador from './components/Navegador/Navegador';
-import FormCrearUsuario from './containers/FormEntrar';
 import Historial from './components/Historial';
 import Presentacion from './components/Presentacion/Presentacion';
-
+import Usuario from './components/Usuario/Usuario';
 
 export default function App() {
   return (
@@ -20,10 +19,10 @@ export default function App() {
         <Navegador />
         <Switch>
           <Route exact path="/" component={Presentacion} />
-          <Route exact path="/discover" component={Recetario} />
-          <Route exact path="/receta/:id" component={Receta} />
-          <Route exact path="/signup" component={FormCrearUsuario} />
-          <Route exact path="/historial" component={Historial} />
+          <Route exact path="/user" component={Usuario} />
+          <Route exact path="/recipes" component={Recetario} />
+          <Route exact path="/recipes/:id" component={Receta} />
+          <Route exact path="/history" component={Historial} />
         </Switch>  
       </Router>
   )

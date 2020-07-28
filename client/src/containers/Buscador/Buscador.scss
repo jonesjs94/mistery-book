@@ -1,0 +1,75 @@
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
+.buscador {
+  width: 100%;
+  height: 50%;
+  padding-top: $altura_nav;
+  background-image: url(/images/FoodBackground.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  font-family: 'Alegreya Sans', sans;
+
+  &__contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.25);
+  }
+}
+
+.form {
+  width: 50%;
+
+  &__titulo {
+    color: $blanco;
+    font-size: 4rem;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.55));
+  }
+
+  &__grupo {
+    display: flex;
+    margin-top: 2rem;
+  }
+  
+  &__input {
+    width: 90%;
+    padding: .75rem 1rem;
+    font-size: 1.2rem;
+    border: 1px solid transparent;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    color: #000;
+    background-color: $amarillo;
+    border: none;
+    outline: none;
+    transition: all .1s linear;
+    
+    &:hover {
+      color: $blanco;
+      background-color: $naranja;
+      cursor: pointer;
+    }
+  }
+}
+
+.gg-search {
+  --ggs: 1.2;
+}
+
+
+@media screen and (max-width: $tablet) {
+  .form {
+    width: 100%;      
+  }
+}

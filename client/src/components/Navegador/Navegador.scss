@@ -2,6 +2,8 @@
 @import '../../utilities/variables';
 @import '../../utilities/fonts';
 
+
+
 .navbar {
   position: fixed;
   top: 0;
@@ -17,7 +19,7 @@
   transition: all .2s linear;
 
   &--scroll {
-    height: calc(#{$altura_nav} - 2rem);
+    height: calc(#{$altura_nav} - 1rem);
     transition: all .2s linear;
   }
 }
