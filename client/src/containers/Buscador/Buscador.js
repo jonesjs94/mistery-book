@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Buscador.scss';
+import { Search } from 'css.gg';
 
 
 const mapStateToProps = state => {
@@ -44,7 +45,7 @@ class Buscador extends React.Component {
                   placeholder="Type ingredientes, cuisins and more" 
                 />
                 <button type="submit" className="form__btn">
-                  <i className="gg-search"></i>
+                  <Search className="search"></Search>
                 </button>
               </div>
             </form>

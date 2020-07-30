@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { buscarUsuario } from '../actions';
 
@@ -38,6 +39,10 @@ class FormularioEntrar extends React.Component {
   }
 
   render() {
+    if(this.props.nombre) {
+      return <Redirect to="/recipes" />
+    }
+    
     return (
       <form onSubmit={this.handleSubmit}>
         <div>

@@ -34,7 +34,7 @@ class FormularioRegistrar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.props.buscarUsuario(this.state);
+    this.props.buscarUsuario(this.state);
   }
 
   render() {

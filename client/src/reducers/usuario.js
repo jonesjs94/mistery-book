@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   cargando: false,
-  usuario: "",
+  nombre: "",
   error: ""
 }
 
@@ -20,14 +20,14 @@ export default function usuario(state = initialState, action) {
     case BUSCAR_USUARIO_EXITO:
       return {
         cargando: false,
-        usuario: action.payload,
+        nombre: action.payload.username,
         error: ""
       }
     case BUSCAR_USUARIO_ERROR:
       return {
         ...state,
         cargando: false,
-        error: action.payload
+        error: action.payload.error
       }          
     default:
       return state;

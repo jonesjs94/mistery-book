@@ -63,13 +63,39 @@
   }
 }
 
-.gg-search {
+.search {
   --ggs: 1.2;
 }
 
 
 @media screen and (max-width: $tablet) {
+  .buscador {
+    padding-top: 0;
+    height: 15rem;
+  }
+  
   .form {
-    width: 100%;      
+    width: 98%;   
+
+    &__titulo {
+      font-size: 2rem;
+    }
+
+    &__input {
+      padding: .5rem;
+      width: 90%;
+
+      &::placeholder {
+        font-size: 1rem;
+      }
+    }
+
+    &__btn {
+      width: 4rem;
+    }
+  }
+
+  .search {
+    --ggs: .9;
   }
 }

@@ -15,6 +15,8 @@ $notebook: 992px;
 $tablet: 768px;
 $altura_nav_tablet: 4rem;
 
+// Height - Nav
+$height: calc(100vh - #{$altura_nav_tablet});
 
 $rojo: #db3830;
 $rojo_oscuro: #da3028;

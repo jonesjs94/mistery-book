@@ -9,10 +9,11 @@
   .icono {
     display: block;
     position: fixed;
+    padding: 1rem;
     height: 2rem;
-    width: 2rem;
+    width: 1.75rem;
     top: 1rem;
-    right: 1.5rem;
+    right: 1.25rem;
     z-index: 999;
     cursor: pointer;
   }
@@ -35,11 +36,11 @@
   }
 
   .bar::before {
-    top: -.75rem;
+    top: -.6rem;
   }
 
   .bar::after {
-    top: .75rem;
+    top: .6rem;
   }
 
   .bar::before,
