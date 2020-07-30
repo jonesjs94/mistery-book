@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import './Navegador.scss';
 import Logo from '../Logo/Logo';
 import MenuHamburguesa from '../MenuHamburguesa/MenuHamburguesa';
-
+import { LoadbarDoc, User  } from 'css.gg';
 
 const mapStateToProps = state => {
   return {
-    usuario: state.usuario.usuario
+    usuario: state.usuario.nombre
   }
 }
 
@@ -19,17 +19,39 @@ class Navegador extends React.Component {
       menuAbierto: false
     };
     this.listener = null;
-    this.handleLogout = this.handleLogout.bind(this);
+    // this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
+    this.mostrar = this.mostrar.bind(this);
   }
 
-  handleLogout(e) {
-    e.preventDefault();
-    fetch("/logout")
+  mostrar() {
+    fetch("/user")
     .then(response => response.json())
-    .then(message => console.log(message.response))
-    .catch(error => console.error);
+    .then(response => console.log(response))
   }
+
+  // handleLogout(e) {
+  //   e.preventDefault();
+  //   fetch("/logout")
+  //   .then(response => response.json())
+  //   .then(message => console.log(message.response))
+  //   .catch(error => console.error);
+  // }
+  // let botonLogout = () => {
+  //   if (!this.props.usuario) {
+  //     return undefined;
+  //   }
+  //   return (
+  //     <li className="menu__item">
+  //     <span 
+  //       className="menu__enlace" 
+  //       onClick={this.handleLogout}
+  //     >
+  //       <LogOut />
+  //     </span>
+  //   </li>
+  //   )
+  // } 
 
   handleNavMenuToggle() {
     const estadoActual = this.state.menuAbierto;
@@ -52,16 +74,20 @@ class Navegador extends React.Component {
           this.setState({ NavbarEnTop: true }); // Navegador en top
       }
     })
+
+    
   }
   
   componentDidUpdate() {
     document.removeEventListener("scroll", this.listener);
+
+
   }
   
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
-    let usuario   = this.props.usuario     ? this.props.usuario : 'Invitado';
+    let classUser = this.props.usuario ? 'menu__usuario' : 'd-none';
     
     return (
       <header className={classNav}>
@@ -73,23 +99,48 @@ class Navegador extends React.Component {
         
         <ul className={classMenu}>
           <li className="menu__item">
-            <h1 className="menu__enlace">{usuario}</h1>
-          </li>
-          <li className="menu__item">
-            <Link className="menu__enlace resaltado" to="/recipes">Recipes</Link>
+          <button onClick={this.mostrar}>MOSTRAR</button>
+              <Link 
+                className="menu__enlace" 
+                onClick={this.handleNavMenuToggle} 
+                to="/recipes">
+                <LoadbarDoc />
+                Recipes
+              </Link>
           </li>
           
           <li className="menu__item">
-            <Link className="menu__enlace" to="/historial">History</Link>
+              <Link 
+                className="menu__enlace" 
+                onClick={this.handleNavMenuToggle} 
+                to="/historial">
+                History
+              </Link>
           </li>
           <li className="menu__item">
-            <Link className="menu__enlace" to="/favoritos">Favorites</Link>
+              <Link 
+                className="menu__enlace" 
+                onClick={this.handleNavMenuToggle} 
+                to="/favoritos">
+                Favorites
+              </Link>
           </li>
           <li className="menu__item">
-            <Link className="menu__enlace" to="/user">User</Link>
-          </li>
-          <li className="menu__item">
-            <Link className="menu__enlace" to="/favoritos">Contact</Link>
+          { // Modifica Elemento si se encuentra ingresado un usuario
+            this.props.usuario ? 
+              (<span className="menu__enlace">
+                <User />
+                {this.props.usuario}
+              </span>) 
+              : 
+              (<Link 
+                className="menu__enlace" 
+                onClick={this.handleNavMenuToggle} 
+                to="/user">
+                <User />
+                {"Sign In/Up"}
+              </Link>)
+          }
           </li>
         </ul>
       </header>
