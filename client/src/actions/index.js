@@ -46,7 +46,7 @@ const guardarConsulta = (consulta) => ({
   }
 }
 
-const buscarUsuarioExito = (usuario) => {
+export const buscarUsuarioExito = (usuario) => {
   return {
     type: BUSCAR_USUARIO_EXITO,
     payload: usuario

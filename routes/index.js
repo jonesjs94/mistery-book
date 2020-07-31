@@ -5,10 +5,11 @@ const express    = require("express"),
       middleware = require("../middleware/index"),
       User       = require("../models/User");
 
-router.get("/user", (req, res) => {
-  res.send(res.locals);
+router.get("/user", middleware.isLoggedIn, (req, res) => {
+  let user = req.user;
+  res.send({ user });
 })
-      
+
 // ingreso
 router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local"), (req, res) => {
   res.send(req.user);

@@ -2,16 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { buscarRecetario } from '../../actions';
 import './Recetario.scss';
-// Bootstrap 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-// App
 import Tarjeta from '../../components/Tarjeta';
 import Buscador from '../Buscador/Buscador';
 import Cargador from '../../components/Cargador';
 
 const mapStateToProps = state => {
-  return { state }
+  return { recetario: state.recetario.recetario }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -44,20 +40,21 @@ class Recetario extends React.Component {
   }
   
   render() {
-    const recetario = this.props.state.recetario;
+    const recetario = this.props.recetario;
+    console.log(recetario);
     const recetas = []; // lista vacía para construir componentes con recetas
     const hayRecetas = recetario.length; // booleano para saber si hay recetas
 
     if (hayRecetas) {
       recetario.forEach(receta => {
         recetas.push(
-          <Col md={4} key={receta.id}>
-            <Tarjeta
-              nombre={receta.title}
-              imagen={receta.image}
-              id={receta.id}
-            />
-          </Col>
+          <Tarjeta
+            key={receta.id}
+            titulo={receta.title}
+            imagen={receta.image}
+            id={receta.id}
+            info={[receta.dishTypes[0], receta.readyInMinutes, receta.servings]}
+          />
         )
       })
     }
@@ -69,9 +66,7 @@ class Recetario extends React.Component {
         <Buscador onSubmit={this.handleSubmit} />
         {/* <button onClick={this.mostrar}>Mostrar</button> */}
         <div className="recetario">
-          <Row>
-            {contenido}
-          </Row>
+          {contenido}
         </div>
       </>
     )

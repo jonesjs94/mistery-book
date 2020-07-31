@@ -7,7 +7,7 @@ import {
 
 // App
 import Recetario from './containers/Recetario/Recetario';
-import Receta from './containers/Receta';
+import Receta from './containers/Receta/Receta';
 import Navegador from './components/Navegador/Navegador';
 import Historial from './components/Historial';
 import Presentacion from './components/Presentacion/Presentacion';

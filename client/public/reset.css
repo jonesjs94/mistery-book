@@ -30,6 +30,11 @@ html, body, #root {
   width: 100%;
 }
 
+/* Set default background color */
+#root {
+  background-color: #f5f5f1;
+}
+
 /* Set core body defaults */
 body {
   scroll-behavior: smooth;

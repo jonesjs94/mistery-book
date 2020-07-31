@@ -1,0 +1,73 @@
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
+.recetario {
+  display: grid;
+  padding-bottom: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 700px));
+  gap: 50px 50px;
+  justify-content: center;
+  background-color: $blanco;
+
+  & a {
+    letter-spacing: 1px;
+    position: relative;
+    padding: 2rem 0;
+    text-decoration: none;
+    color: $marron;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: height 0.2s;
+      background-color: rgba(219, 56, 48, .5);
+    }
+    
+    &:hover::after {
+      height: 7px;
+    }
+  }
+}
+
+.recetario .tarjeta {
+  display: flex;
+  font-family: 'Alegreya Sans';
+    
+  &__imagen {
+    width: 40%;
+    height: auto;
+    border: 4px solid #fff;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  &__titulo {
+    font-size: 1.5rem;
+  }
+
+  &__texto {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .recetario .tarjeta {
+    &__titulo {
+      font-size: 1.1rem;
+    }
+
+    &__texto {
+      font-size: .75rem;
+    }
+  }
+}

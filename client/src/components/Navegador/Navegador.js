@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { buscarUsuarioExito } from '../../actions';
 import './Navegador.scss';
 import Logo from '../Logo/Logo';
 import MenuHamburguesa from '../MenuHamburguesa/MenuHamburguesa';
@@ -9,6 +10,12 @@ import { LoadbarDoc, User  } from 'css.gg';
 const mapStateToProps = state => {
   return {
     usuario: state.usuario.nombre
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    buscarUsuarioExito: usuario => dispatch(buscarUsuarioExito(usuario))
   }
 }
 
@@ -21,13 +28,17 @@ class Navegador extends React.Component {
     this.listener = null;
     // this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
-    this.mostrar = this.mostrar.bind(this);
+    this.checkLoggedIn = this.checkLoggedIn.bind(this);
   }
 
-  mostrar() {
+  // Chequea y establece usuario si está logueado en el server
+  checkLoggedIn() {
     fetch("/user")
-    .then(response => response.json())
-    .then(response => console.log(response))
+    .then(respuesta => respuesta.json())
+    .then(resultado => {
+      this.props.buscarUsuarioExito(resultado.user);
+    })
+    .catch(e => console.log(e))
   }
 
   // handleLogout(e) {
@@ -75,19 +86,16 @@ class Navegador extends React.Component {
       }
     })
 
-    
+    this.checkLoggedIn();
   }
   
   componentDidUpdate() {
     document.removeEventListener("scroll", this.listener);
-
-
   }
   
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
-    let classUser = this.props.usuario ? 'menu__usuario' : 'd-none';
     
     return (
       <header className={classNav}>
@@ -99,7 +107,6 @@ class Navegador extends React.Component {
         
         <ul className={classMenu}>
           <li className="menu__item">
-          <button onClick={this.mostrar}>MOSTRAR</button>
               <Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
@@ -150,5 +157,5 @@ class Navegador extends React.Component {
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Navegador);
