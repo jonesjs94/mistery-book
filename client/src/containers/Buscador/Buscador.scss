@@ -4,9 +4,10 @@
 
 .buscador {
   width: 100%;
-  height: 50%;
+  height: 50vh;
   padding-top: $altura_nav;
   background-image: url(/images/FoodBackground.jpg);
+  background-attachment: scroll;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -68,7 +69,7 @@
 }
 
 
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $tablet_breakpoint) {
   .buscador {
     padding-top: 0;
     height: 15rem;
@@ -79,6 +80,10 @@
 
     &__titulo {
       font-size: 2rem;
+    }
+
+    &__grupo {
+      margin-top: 1rem;
     }
 
     &__input {
@@ -97,5 +102,11 @@
 
   .search {
     --ggs: .9;
+  }
+}
+
+@media screen and (min-width: $tablet_breakpoint) and (max-width: $notebook_breakpoint) {
+  .form {
+    width: 70%;
   }
 }

@@ -82,7 +82,7 @@
   }
 }
 
-@media screen and (max-width: $notebook) {
+@media screen and (max-width: $notebook_breakpoint) {
   .menu {
     &__item {
       padding: initial;
@@ -94,7 +94,7 @@
   }
 }
 
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $tablet_breakpoint) {
   .navbar {
     position: sticky;
     height: $altura_nav_tablet;

@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 10px;
-  font-size: 3rem;
+  font-size: 2.5rem;
   transition: all .2s linear;
 
   &--scroll {
@@ -24,7 +24,7 @@
 /*
   Breakpoint tablet - 768px
 */
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $tablet_breakpoint) {
   .logo {
     font-size: 1.5rem;
     margin-left: 1rem;

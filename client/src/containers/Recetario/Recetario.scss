@@ -5,7 +5,7 @@
 .recetario {
   display: grid;
   padding-bottom: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 700px));
+  grid-template-columns: repeat(2, minmax(200px, 600px));
   gap: 50px 50px;
   justify-content: center;
   background-color: $blanco;
@@ -60,7 +60,23 @@
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: $phone_breakpoint) {
+  .recetario .tarjeta {
+    flex-direction: column;
+    text-align: center;
+    
+    &__imagen {
+      width: 100%;
+    }
+
+  }
+}
+
+@media screen and (max-width: $tablet_breakpoint) {
+  .recetario {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 600px));
+  }
+  
   .recetario .tarjeta {
     &__titulo {
       font-size: 1.1rem;
@@ -69,5 +85,11 @@
     &__texto {
       font-size: .75rem;
     }
+  }
+}
+
+@media screen and (max-width: $notebook_breakpoint) {
+  .recetario {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 600px));
   }
 }
