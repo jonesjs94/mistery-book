@@ -7,19 +7,18 @@ $rojo_oscuro: #da3028;
 $naranja: #e76f35;
 $amarillo: #f3cb38;
 
-// Small devices
-$phone_breakpoint: 576px;
-
-// Medium devices
-$tablet_breakpoint: 768px;
-
-// Large devices
-$notebook_breakpoint: 992px;
-
-// Extra large devices
-$desktop_breakpoint: 1200px;
 
 // Height - Nav
 $altura_nav_tablet: 4rem;
 $height: calc(100vh - #{$altura_nav_tablet});
+
+
+// --------------- Responsive variables - Desktop First ---------------
+
+$phone_breakpoint: 575.98px; // Extra small devices (portrait phones, less than 576px)
+$tablet_breakpoint: 767.98px; // Small devices (landscape phones, less than 768px)
+$notebook_breakpoint: 991.98px; // Medium devices (tablets, less than 992px)
+$desktop_breakpoint: 1199.98px; // Large devices (desktops, less than 1200px)
+
+
 

@@ -8,7 +8,7 @@ export default function Presentacion(props) {
       <div className="presentacion">
         <h1 className="presentacion__titulo">DISCOVER NEW <br /> WAYS OF ENJOY <br /> YOUR FOOD</h1>
         <p className="presentacion__texto">More than 300k of recipes are waiting to be discovered</p>
-        <Link to="/recipes" className="presentacion__btn">Start now</Link> 
+        <Link to="/recetas" className="presentacion__btn">Start now</Link> 
       </div>
     </div>
   )

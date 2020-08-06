@@ -9,6 +9,7 @@ import { LoadbarDoc, User  } from 'css.gg';
 
 const mapStateToProps = state => {
   return {
+    estado: state,
     usuario: state.usuario.nombre
   }
 }
@@ -29,6 +30,7 @@ class Navegador extends React.Component {
     // this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
     this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.estado = this.estado.bind(this);
   }
 
   // Chequea y establece usuario si está logueado en el server
@@ -92,11 +94,16 @@ class Navegador extends React.Component {
   componentDidUpdate() {
     document.removeEventListener("scroll", this.listener);
   }
+
+  estado() {
+    console.log(this.props.estado)
+  }
+  
   
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
-    
+
     return (
       <header className={classNav}>
         <MenuHamburguesa 
@@ -106,11 +113,12 @@ class Navegador extends React.Component {
         <Logo estadoNavbar={this.state.NavbarEnTop} />  
         
         <ul className={classMenu}>
+        <li className="menu__item" onClick={this.estado}>MOSTRAR ESTADO</li>
           <li className="menu__item">
               <Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/recipes">
+                to="/recetas">
                 <LoadbarDoc />
                 Recipes
               </Link>
@@ -143,7 +151,7 @@ class Navegador extends React.Component {
               (<Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/user">
+                to="/usuario">
                 <User />
                 {"Sign In/Up"}
               </Link>)

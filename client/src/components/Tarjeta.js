@@ -17,7 +17,7 @@ export default function Tarjeta(props) {
   }
   
   return (
-    <Link className="animate__animated animate__flipInX" to={`/receta/${id}`}>
+    <Link className="animate__animated animate__flipInX" to={`/recetas/${id}`}>
     <div className="tarjeta">
         <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
         <div className="tarjeta__info">

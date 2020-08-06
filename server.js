@@ -9,6 +9,7 @@ const express            = require("express"),
 // ROUTES
 const indexRoute = require("./routes/index");
 const historyRoute = require("./routes/history");
+const favoritesRoute = require("./routes/favorites");
    
 // DB CONNECTION
 mongoose.connect(
@@ -41,6 +42,8 @@ initializePassport();
 // ROUTES
 app.use(indexRoute);
 app.use(historyRoute);
+app.use(favoritesRoute);
+
 
 // GLOBAL VARIABLES
 app.use((req, res, next) => {

@@ -7,7 +7,9 @@ import Buscador from '../Buscador/Buscador';
 import Cargador from '../../components/Cargador';
 
 const mapStateToProps = state => {
-  return { recetario: state.recetario.recetario }
+  return { 
+    recetario: state.recetario.data 
+  }
 }
 
 const mapDispatchToProps = dispatch => {

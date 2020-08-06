@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   cargando: false, 
-  recetario: [],
+  data: [],
   error: ""
 }
 
@@ -20,7 +20,7 @@ export default function recetario(state = initialState, action) {
     case BUSCAR_RECETARIO_EXITO:
       return {
         cargando: false,
-        recetario: action.payload,
+        data: action.payload,
         error: ""
       }
     case BUSCAR_RECETARIO_ERROR:

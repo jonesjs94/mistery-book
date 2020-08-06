@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   font-family: 'Alegreya Sans', sans;
+  font-weight: bold;
   letter-spacing: 1px;
   width: 100%;
   height: $altura_nav;
@@ -96,7 +97,6 @@
 
 @media screen and (max-width: $tablet_breakpoint) {
   .navbar {
-    position: sticky;
     height: $altura_nav_tablet;
   }
   

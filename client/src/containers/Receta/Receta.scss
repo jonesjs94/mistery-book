@@ -1,0 +1,307 @@
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
+.contenedor-receta {
+  padding-top: $altura_nav;
+  font-family: 'Alegreya Sans';
+  color: $marron;
+  background-color: $blanco;
+}
+
+.contenedor_spinner {
+  height: calc(100vh - #{$altura_nav});
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & i {
+    --ggs: 3;
+  }
+}
+
+.receta {
+  max-width: 80%;
+  margin: 2rem auto 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__botones {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    font-size: 1rem;
+    font-family: "Permanent Marker";
+  }
+  
+  &__btn-favorito {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    border: none;
+    color: $rojo;
+    background-color: $blanco;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+    
+    & i {
+      font-size: 1.5rem;
+      margin: 0 .5rem;
+      transition: all .1s linear;
+    }
+
+    &:hover i {
+      transform: scale(1.5);
+    }    
+  }
+  
+  &__btn-volver {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem !important;
+    text-decoration: none;
+    color: $naranja;
+  }
+  
+  &__titulo {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+  }
+
+  &__imagen {
+    border: 5px solid #fff;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__resumen {
+    width: 90%;
+    font-size: 1.25rem;
+    margin: 2rem 0;
+
+    & a {
+      color: $rojo;
+    }
+  }
+
+  &__detalles {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.info {
+
+  &__icono {
+    display: flex;
+    align-items: center;
+    margin: .5rem 2rem;
+    font-size: 1rem;
+    --ggs: 1.2;
+
+    & i {
+      margin-right: .5rem;
+    }
+
+    & span {
+      font-weight: 500;
+    }
+  }
+}
+
+.alarm i {
+  color: $rojo;
+}
+.bowl i {
+  color: green;
+}
+.star i {
+  color: $amarillo
+}
+
+.instrucciones {
+  padding-right: 2rem !important;
+  
+  &__titulo {
+    font-size: 1.25rem;
+    text-align: center;
+    margin: .75rem 0;
+  }
+  
+  &__paso {
+    position: relative;
+    width: 100%;
+    margin: 1rem 0;
+
+    & span {
+      font-family: 'Permanent Marker';
+      font-size: 1.25rem;
+      position: relative;
+      padding-right: 1rem;
+      background-color: $blanco;
+      z-index: 1;
+    }
+    
+    &:before {
+      content: ' ';
+      display: block;
+      background: #ddd;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      z-index: 0;
+    }
+  }
+
+  &__texto {
+    font-size: 1.2rem;
+  }
+}
+
+.ingredientes {
+  padding: 0 1.5rem 1.5rem 1.5rem !important;
+  font-weight: 500;
+  
+  &__titulo {
+    font-size: 1.25rem;
+    text-align: center;
+    margin: .75rem 0;
+  }
+  
+  &__ingrediente {
+    background-color: white;
+    font-size: 1.25rem;
+    height: 100px;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 120px 1fr 100px;
+
+    & img {
+      justify-self: center;
+      align-self: center;
+    }
+    
+    & p {
+      align-self: center;
+    }
+
+    & p:first-of-type {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.tippy-favoritos {
+  color: $marron;
+  background-color: $blanco;
+  padding: .5rem 1rem;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+
+@media (min-width: $tablet_breakpoint) and (max-width: $notebook_breakpoint) {
+  .receta {
+    &__detalles {
+      width: 100%;
+    }
+  }
+
+  .ingredientes {
+    padding: 0 !important;
+  }
+}
+
+@media screen and (max-width: $tablet_breakpoint) {
+  .receta {
+    max-width: 100%;
+    margin: 0 .5rem 0 .5rem;
+
+    &__botones {
+      justify-content: space-between;
+    }
+
+    &__back-btn {
+      font-size: .75rem;
+      position: static;
+      margin: 1rem 0;
+      align-self: flex-start;
+    }
+
+    &__titulo {
+      text-align: center;
+      font-size: 1.25rem;
+    }
+
+    &__info {
+      margin: .5rem 0;
+      display: block;
+    }
+
+    &__resumen {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+
+    &__detalles {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .info {
+    &__icono {
+      --ggs: 1;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .instrucciones {
+    margin: 0 0 2.5rem .55rem !important;
+    padding: 0 !important;
+    &__texto {
+      font-size: 1rem;
+    }
+  }
+
+  .ingredientes {
+
+    &__ingrediente {
+      grid-template-columns: 100px 1fr 60px;
+    }
+
+    & img {
+      max-width: 70px;
+    }
+
+    & p {
+      font-size: 1rem;
+    }
+    
+    & p:not(:first-of-type) {
+      text-align: center;
+    }
+    
+    & p:first-of-type {
+      margin: 0 .5rem;
+    }
+
+  }
+}
+
+

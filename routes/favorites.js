@@ -3,17 +3,17 @@ const express    = require("express"),
       middleware = require("../middleware/index"),
       User       = require("../models/User");
 
-router.post("/history", middleware.isLoggedIn, (req, res) => {
+router.post("/favorites", middleware.isLoggedIn, (req, res) => {
   
   User.findByIdAndUpdate(
     req.user._id, 
-    {$push: {history: req.body}},
-    (err, history) => {
+    {$push: {favorites: req.body}},
+    (err, favorite) => {
       if (err) {
         console.log(err);
       } else   { 
         res.sendStatus(200);
-        console.log("History saved.");
+        console.log("Favorite saved.");
       }
     }
   );

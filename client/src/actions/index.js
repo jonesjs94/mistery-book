@@ -5,10 +5,13 @@ import {
   BUSCAR_RECETARIO_PENDIENTE,
   BUSCAR_RECETARIO_EXITO,
   BUSCAR_RECETARIO_ERROR,
+  BUSCAR_RECETA_PENDIENTE,
+  BUSCAR_RECETA_EXITO,
+  BUSCAR_RECETA_ERROR,  
   GUARDAR_CONSULTA,
   AGREGAR_HISTORIAL,
   AGREGAR_FAVORITO,
-  ABRIR_RECETA
+  REMOVER_FAVORITO
 } from './actionTypes';
 import { store } from '../store';
 // Librería para manejar el objeto Date
@@ -16,16 +19,17 @@ import moment from 'moment';
 import 'moment/locale/es';
 moment.locale('es');
 
-
-// ------------ RECETA ------------
-export const abrirReceta = (receta) => ({
-  type: ABRIR_RECETA,
-  payload: receta
-});
-
 // ------------ FAVORITO ------------
-export const agregarFavorito = (favorito) => ({
-  type: AGREGAR_FAVORITO,
+export const agregarFavorito = (receta) => {
+  guardarEnDB(receta, "/favorites")
+  return { 
+    type: AGREGAR_FAVORITO,
+    payload: receta
+  }
+};
+
+export const removerFavorito = (favorito) => ({
+  type: REMOVER_FAVORITO,
   payload: favorito
 });
 
@@ -34,6 +38,58 @@ const guardarConsulta = (consulta) => ({
   type: GUARDAR_CONSULTA,
   payload: consulta
 });
+
+
+// -----------------------------------
+// ------------ RECETA ------------
+// -----------------------------------
+
+const buscarRecetaPendiente = () => {
+  return {
+    type: BUSCAR_RECETA_PENDIENTE
+  }
+}
+
+const buscarRecetaExito = (receta) => {
+  return {
+    type: BUSCAR_RECETA_EXITO,
+    payload: receta
+  }
+}
+
+const buscarRecetaError = (error) => {
+  return {
+    type: BUSCAR_RECETA_ERROR,
+    payload: error
+  }
+}
+
+/**
+ * Creador de acción para búsqueda a la API.
+ * Despacha 3 estados -> consulta / recetario / historial.
+ * 
+ * @param {String} consulta - Texto de la búsqueda 
+ */
+export const buscarReceta = (id) => {
+  return dispatch => {
+    dispatch(buscarRecetaPendiente());
+    console.log(`Obteniendo receta ...`);
+    const apiKey = "03d842cc1cbc4535bf140ca81c4578ac";
+    fetch(`https://api.spoonacular.com/recipes/${id}/information?&apiKey=${apiKey}`)
+    .then(respuesta => {
+      return respuesta.json();
+    })
+    .then(receta => {
+      console.log(`Receta obtenida.`);
+      dispatch(buscarRecetaExito(receta));
+    })
+    .catch(e => {
+      console.error(e);
+      dispatch(buscarRecetaError(e));
+    })
+  }
+}
+ // -----------------------------------
 
 
 // -----------------------------------
@@ -49,6 +105,7 @@ const guardarConsulta = (consulta) => ({
 export const buscarUsuarioExito = (usuario) => {
   return {
     type: BUSCAR_USUARIO_EXITO,
+    content: true,
     payload: usuario
   }
 }
@@ -56,6 +113,7 @@ export const buscarUsuarioExito = (usuario) => {
 const buscarUsuarioError = (error) => {
   return {
     type: BUSCAR_USUARIO_ERROR,
+    content: false,
     payload: error
   }
 }
@@ -103,10 +161,10 @@ export const buscarUsuario = (usuario) => {
   }
 }
 
-const buscarRecetarioExito = (RECETARIO) => {
+const buscarRecetarioExito = (recetario) => {
   return {
     type: BUSCAR_RECETARIO_EXITO,
-    payload: RECETARIO
+    payload: recetario
   }
 }
 
@@ -175,7 +233,7 @@ const agregarHistorial = (consulta, recetario) => {
     fecha
   }
 
-  guardarHistoriaDB(historia);
+  guardarEnDB(historia, "/history");
 
   return {
     type: AGREGAR_HISTORIAL,
@@ -183,30 +241,30 @@ const agregarHistorial = (consulta, recetario) => {
   }
 }
 
-/**
- * Almacena historia en la base de datos si hay un usuario logueado
- * 
- * @param {object} historia
- */
-const guardarHistoriaDB = (historia) => {
-    const estado = store.getState();
-    const usuarioActivo = estado.usuario;
-
-    if (usuarioActivo) {
-      const cabecera = new Headers();
-      cabecera.set("Content-Type", "application/json");
-      
-      fetch('/history', {
-        method: 'POST',
-        headers: cabecera,
-        body: JSON.stringify(historia)
-      })
-      .then(respuesta => respuesta.json())
-      .then(resultado => {
-        console.log(resultado);
-      })
-      .catch(e => console.error);
-    }
-}
-
 // -----------------------------------
+
+/**
+ * Almacena historia o favorito en la base de datos si hay un usuario logueado
+ * 
+ * @param {object} objeto
+ */
+const guardarEnDB = (objecto, url) => {
+  const estado = store.getState();
+  const usuarioActivo = estado.usuario;
+
+  if (usuarioActivo) {
+    const cabecera = new Headers();
+    cabecera.set("Content-Type", "application/json");
+    
+    fetch(url, {
+      method: 'POST',
+      headers: cabecera,
+      body: JSON.stringify(objecto)
+    })
+    .then(respuesta => respuesta.json())
+    .then(resultado => {
+      console.log("objeto guardado en la DB", resultado);
+    })
+    .catch(e => console.error);
+  }
+}
