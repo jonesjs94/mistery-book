@@ -4,11 +4,18 @@
 @import '../../utilities/class';
 
 .contenedor-favoritos {
+  padding-top: $altura_nav;
   width: 100%;
   height: 100vh;
 }
 
 .favoritos {
   max-width: 80%;
+  margin: 2rem auto 0 auto;
   background-color: $blanco;
+}
+
+.favoritos .tarjeta {
+  display: flex;
+  font-family: 'Alegreya Sans';
 }

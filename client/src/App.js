@@ -22,11 +22,11 @@ export default function App() {
         <ScrollToTop />
         <Switch>
           <Route exact path="/" component={Presentacion} />
-          <Route exact path="/usuario" component={Usuario} />
-          <Route exact path="/recetas" component={Recetario} />
-          <Route exact path="/recetas/:id" component={Receta} />
-          <Route exact path="/favoritos" component={Favoritos} />
-          <Route exact path="/historial" component={Historial} />
+          <Route exact path="/user" component={Usuario} />
+          <Route exact path="/recipes" component={Recetario} />
+          <Route exact path="/recipes/:id" component={Receta} />
+          <Route exact path="/favorites" component={Favoritos} />
+          <Route exact path="/history" component={Historial} />
         </Switch>  
       </Router>
   )

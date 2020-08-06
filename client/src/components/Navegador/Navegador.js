@@ -118,7 +118,7 @@ class Navegador extends React.Component {
               <Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/recetas">
+                to="/recipes">
                 <LoadbarDoc />
                 Recipes
               </Link>
@@ -128,7 +128,7 @@ class Navegador extends React.Component {
               <Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/historial">
+                to="/history">
                 History
               </Link>
           </li>
@@ -136,7 +136,7 @@ class Navegador extends React.Component {
               <Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/favoritos">
+                to="/favorites">
                 Favorites
               </Link>
           </li>
@@ -151,7 +151,7 @@ class Navegador extends React.Component {
               (<Link 
                 className="menu__enlace" 
                 onClick={this.handleNavMenuToggle} 
-                to="/usuario">
+                to="/user">
                 <User />
                 {"Sign In/Up"}
               </Link>)

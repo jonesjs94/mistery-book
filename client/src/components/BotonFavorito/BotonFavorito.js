@@ -22,9 +22,11 @@ class BotonFavorito extends React.Component {
   // Chequea si la receta se encuentra actualmente en favoritos y define su estado
   componentDidMount() {
     const favorites = this.props.favorites;
+    console.log("favorites", favorites)
     if(favorites === undefined) {
       return false;
     }
+    debugger;
     let foundInFav = favorites.find(recipe => recipe.id === this.props.id)
     this.setState({ isInFavorites: foundInFav })
   }
@@ -48,9 +50,6 @@ class BotonFavorito extends React.Component {
   
   render() {
     const { className, tippyClassName } = this.props;    
-    let btnText   = this.state.isInFavorites ? '' : 'Add to Favorites';
-    // fas -> filled icon / far -> empty icon
-    let iconClass = this.state.isInFavorites ? 'fas fa-heart' : 'far fa-heart';
 
     return (
       <Tippy 
@@ -63,8 +62,9 @@ class BotonFavorito extends React.Component {
         zIndex="1"
       >
         <button id="fav-btn" className={className} onClick={this.handleFav} >
-          {btnText}
-          <i className={iconClass}></i>
+          {this.state.isInFavorites ? '' : 'Add to Favorites'}
+          {/* fas -> filled icon / far -> empty icon */}
+          <i className={this.state.isInFavorites ? 'fas fa-heart' : 'far fa-heart'}></i>
         </button>
       </Tippy>
     )

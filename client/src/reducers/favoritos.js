@@ -8,7 +8,7 @@ export default function favoritos(state = [], action) {
       return [
         ...state,
         action.payload
-      ]
+      ];
     default:
       return state;
   }

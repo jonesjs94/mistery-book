@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Tarjeta(props) {
 
   const { titulo, imagen, id, info } = props;
-  
+    
   function handleInfo(info) {
     if(!info.length) { return false }
     const [dishTypes, readyInMinutes, servings] = info;
@@ -17,14 +17,18 @@ export default function Tarjeta(props) {
   }
   
   return (
-    <Link className="animate__animated animate__flipInX" to={`/recetas/${id}`}>
+    <Link to={`/recipes/${id}`}>
     <div className="tarjeta">
         <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
         <div className="tarjeta__info">
           <h3 className="tarjeta__titulo">{titulo}</h3>
-          <div className="tarjeta__texto">
-            <p>{handleInfo(info)}</p>
-          </div>
+          {info ? 
+            (<div className="tarjeta__texto">
+              <p>{handleInfo(info)}</p>
+            </div>)
+          : 
+          null}
+
         </div>
     </div>
     </Link>

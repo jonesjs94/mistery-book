@@ -11,16 +11,19 @@ const mapStateToProps = state => {
 
 class Favoritos extends React.Component {
   render() {
-    const elementos = this.props.favoritos.map(receta => {
+    debugger;
+    const elementos = this.props.favoritos.map((receta, index) => {
       return (
         <Tarjeta 
-          key={receta.id}
-          titulo={receta.title}
-          imagen={receta.image}
+          key={index}
+          titulo={receta.titulo}
+          imagen={receta.imagen}
           id={receta.id}
         />
       )
     })
+
+    console.log(elementos)
     
     return (
       <div className="contenedor-favoritos">
