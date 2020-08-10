@@ -52,6 +52,7 @@ class Recetario extends React.Component {
         recetas.push(
           <Tarjeta
             key={receta.id}
+            path="recipes"
             titulo={receta.title}
             imagen={receta.image}
             id={receta.id}

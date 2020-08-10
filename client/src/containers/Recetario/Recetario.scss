@@ -11,9 +11,10 @@
   background-color: $blanco;
 
   & a {
-    letter-spacing: 1px;
+    display: flex;
     position: relative;
     padding: 2rem 0;
+    letter-spacing: 1px;
     text-decoration: none;
     color: $marron;
 

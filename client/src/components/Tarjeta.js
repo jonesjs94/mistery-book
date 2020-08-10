@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 
 export default function Tarjeta(props) {
 
-  const { titulo, imagen, id, info } = props;
+  const { 
+    id, 
+    titulo, 
+    imagen, 
+    info, 
+    extraElement, 
+    path,
+    handleRemoveFav
+  } = props;
     
   function handleInfo(info) {
     if(!info.length) { return false }
@@ -15,22 +23,33 @@ export default function Tarjeta(props) {
     let finalInfo = array.join("  /  ");
     return finalInfo;
   }
+
+  function handleExtraElements(extraElement, recipeID) {
+    switch(extraElement) {
+      case "btnDeleteFav":
+        return (
+          <button onClick={() => handleRemoveFav(recipeID)} className="tarjeta__btn-borrar-fav">
+            <i className="fas fa-trash"></i>
+          </button>
+        );
+
+      default:
+        return null;
+    }
+  }
   
   return (
-    <Link to={`/recipes/${id}`}>
     <div className="tarjeta">
+    <Link to={`/recipes/${id}?from=${path}`}>
         <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
         <div className="tarjeta__info">
           <h3 className="tarjeta__titulo">{titulo}</h3>
-          {info ? 
-            (<div className="tarjeta__texto">
-              <p>{handleInfo(info)}</p>
-            </div>)
-          : 
-          null}
-
+          <div className="tarjeta__texto">
+            <p>{handleInfo(info)}</p>
+          </div>
         </div>
-    </div>
     </Link>
+    {handleExtraElements(extraElement, id)}
+    </div>
   )
 }

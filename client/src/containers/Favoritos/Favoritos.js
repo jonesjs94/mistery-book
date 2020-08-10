@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { removerFavorito } from '../../actions'
 import './Favoritos.scss';
 import Tarjeta from '../../components/Tarjeta';
 
@@ -9,16 +10,35 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    removerFavorito: id => dispatch(removerFavorito(id))
+  }
+}
+
 class Favoritos extends React.Component {
+  constructor(props) {
+    super(props)
+    this.removeFav = this.removeFav.bind(this);
+  }
+
+  removeFav(id) {
+    console.log("llego")
+    this.props.removerFavorito(id);
+  }
+  
   render() {
-    debugger;
     const elementos = this.props.favoritos.map((receta, index) => {
       return (
-        <Tarjeta 
+        <Tarjeta
           key={index}
+          path="favorites"
+          extraElement="btnDeleteFav"
           titulo={receta.titulo}
           imagen={receta.imagen}
           id={receta.id}
+          info={[receta.dishTypes, receta.readyInMinutes, receta.servings]}
+          handleRemoveFav={this.removeFav}
         />
       )
     })
@@ -26,9 +46,10 @@ class Favoritos extends React.Component {
     console.log(elementos)
     
     return (
-      <div className="contenedor-favoritos">
-        <div className="favoritos">
-          {elementos}
+      <div className="favoritos">
+        <div className="favoritos__contenedor">
+          <h1 className="favoritos__h1">My Favorites</h1>
+          <div className="favoritos__tarjetas">{elementos}</div>
         </div>
       </div>
     )
@@ -36,5 +57,6 @@ class Favoritos extends React.Component {
  }
 
  export default connect(
-   mapStateToProps
+   mapStateToProps,
+   mapDispatchToProps
  )(Favoritos)

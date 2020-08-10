@@ -3,19 +3,72 @@
 @import '../../utilities/fonts';
 @import '../../utilities/class';
 
-.contenedor-favoritos {
+.favoritos {
+  font-family: "Alegreya Sans", sans;
   padding-top: $altura_nav;
   width: 100%;
-  height: 100vh;
-}
-
-.favoritos {
-  max-width: 80%;
-  margin: 2rem auto 0 auto;
+  min-height: 100vh;
   background-color: $blanco;
-}
 
-.favoritos .tarjeta {
-  display: flex;
-  font-family: 'Alegreya Sans';
+  &__contenedor {
+    max-width: 80%;
+    margin: 2rem auto 0 auto;
+    background-color: $blanco;
+  }
+  
+  &__h1 {
+    font-size: 3rem;
+    margin: 2rem 0;
+    color: $marron;
+  }
+
+  & a {
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #513629;
+  }
+  
+  &__tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
+    gap: 50px;
+    justify-content: center;
+  }
+
+  & .tarjeta {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Alegreya Sans';
+    padding: 1rem;
+    height: 100%;
+    border: 2px solid rgba(219, 56, 48, 0.5);
+    transition: .3s all ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 5px 5px 6px rgba(219, 56, 48, 0.5);
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: .5rem 1rem;
+    }
+
+    &__texto {
+      font-size: 1rem;
+      text-align: center;
+      margin: .5rem 0;
+    }
+
+    &__titulo {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    &__imagen {
+      border: 4px solid #fff;
+    }
+  }
 }

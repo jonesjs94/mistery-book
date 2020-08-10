@@ -21,8 +21,13 @@ const mapDispatchToProps = dispatch => {
 
 class Receta extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      previousRoute: '',
+      isInFavorites: false
+    }
     this.addFav = this.addFav.bind(this);
+    this.handleStateFav = this.handleStateFav.bind(this);
   }
   
   componentDidMount() {
@@ -30,21 +35,43 @@ class Receta extends React.Component {
     const expresion = new RegExp(/[0-9]*$/); // Busca id de receta en la url
     const id = path.match(expresion)[0];
     this.props.buscarReceta(id);
+
+    // Define desde que componente se produjo la acción de renderizar la receta
+    const url = new URLSearchParams(window.location.search)
+    let from = url.get("from");
+    this.setState({ previousRoute: from })
+
+    // Si proviene de Favoritos, defino el estado
+    if(from === "favorites") this.setState({ isInFavorites: true });
   }
 
+  // Agrega la receta al estado de redux favoritos mediante una acción
   addFav() {
     const receta = this.props.receta.data;
     const newRecipe = {
       id: receta.id,
       titulo: receta.title,
-      imagen: receta.image
+      imagen: receta.image,
+      dishTypes: receta.dishTypes[0], 
+      readyInMinutes: receta.readyInMinutes, 
+      servings: receta.servings
     }
     this.props.agregarFavorito(newRecipe);
-    console.log("Agregado a Favoritos!")
+    console.log("Agregado a Favoritos!", newRecipe)
+  }
+
+  // Maneja el estado de favoritos en receta
+  handleStateFav() {
+    if (this.state.isInFavorites) {
+      return false
+    }
+    this.setState({ isInFavorites: true })
+    
+    // Agrega receta a Favoritos
+    this.addFav();
   }
 
   render() {
-    console.log(this.props.receta.data);
     const content = this.props.receta.content;
     const receta = this.props.receta.data;
     return (
@@ -59,10 +86,17 @@ class Receta extends React.Component {
         <div className="receta">
 
           <div className="receta__botones">
-            <Link to="/recetas" className="receta__btn-volver"><ArrowLeft />Back to recipes</Link>
+            <Link 
+              to={`/${this.state.previousRoute}`} 
+              className="receta__btn-volver"
+            >
+              <ArrowLeft />
+              Back to {this.state.previousRoute}
+            </Link>
             <BotonFavorito 
               id={receta.id}
-              addFav={this.addFav}
+              handleStateFav={this.handleStateFav}
+              isInFavorites= {this.state.isInFavorites}
               className="receta__btn-favorito" 
               tippyClassName="tippy-favoritos" />
           </div>
