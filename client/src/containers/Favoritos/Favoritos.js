@@ -23,7 +23,6 @@ class Favoritos extends React.Component {
   }
 
   removeFav(id) {
-    console.log("llego")
     this.props.removerFavorito(id);
   }
   

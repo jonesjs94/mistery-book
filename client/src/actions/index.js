@@ -28,10 +28,13 @@ export const agregarFavorito = (receta) => {
   }
 };
 
-export const removerFavorito = (favorito) => ({
-  type: REMOVER_FAVORITO,
-  payload: favorito
-});
+export const removerFavorito = (idReceta) => {
+  eliminarEnDB(`/favorites/delete/${idReceta}`);
+  return {
+    type: REMOVER_FAVORITO,
+    payload: idReceta
+  }
+};
 
 // ------------ CONSULTA  ------------
 const guardarConsulta = (consulta) => ({
@@ -266,5 +269,20 @@ const guardarEnDB = (objecto, url) => {
       console.log("objeto guardado en la DB", resultado);
     })
     .catch(e => console.error);
+  }
+}
+
+
+/**
+ * Elimina historia o favorito en la base de datos si hay un usuario logueado
+ * 
+ * @param {object} objeto
+ */
+const eliminarEnDB = (url) => {
+  const estado = store.getState();
+  const usuarioActivo = estado.usuario;
+
+  if (usuarioActivo) {
+    fetch(url)
   }
 }
