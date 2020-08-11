@@ -10,7 +10,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Recetario from './containers/Recetario/Recetario';
 import Receta from './containers/Receta/Receta';
 import Navegador from './components/Navegador/Navegador';
-import Historial from './components/Historial';
+import Historial from './components/Historial/Historial';
 import Presentacion from './components/Presentacion/Presentacion';
 import Usuario from './components/Usuario/Usuario';
 import Favoritos from './containers/Favoritos/Favoritos';

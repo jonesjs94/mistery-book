@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removerFavorito } from '../../actions'
 import './Favoritos.scss';
-import Tarjeta from '../../components/Tarjeta';
+import TarjetaFavorito from '../../components/TarjetaFavorito';
 
 const mapStateToProps = state => {
   return {
@@ -29,10 +29,9 @@ class Favoritos extends React.Component {
   render() {
     const elementos = this.props.favoritos.map((receta, index) => {
       return (
-        <Tarjeta
+        <TarjetaFavorito
           key={index}
           path="favorites"
-          extraElement="btnDeleteFav"
           titulo={receta.titulo}
           imagen={receta.imagen}
           id={receta.id}

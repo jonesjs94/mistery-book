@@ -30,7 +30,6 @@ class Navegador extends React.Component {
     // this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
     this.checkLoggedIn = this.checkLoggedIn.bind(this);
-    this.estado = this.estado.bind(this);
   }
 
   // Chequea y establece usuario si está logueado en el server
@@ -94,11 +93,6 @@ class Navegador extends React.Component {
   componentDidUpdate() {
     document.removeEventListener("scroll", this.listener);
   }
-
-  estado() {
-    console.log(this.props.estado)
-  }
-  
   
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
@@ -113,7 +107,6 @@ class Navegador extends React.Component {
         <Logo estadoNavbar={this.state.NavbarEnTop} />  
         
         <ul className={classMenu}>
-        <li className="menu__item" onClick={this.estado}>MOSTRAR ESTADO</li>
           <li className="menu__item">
               <Link 
                 className="menu__enlace" 

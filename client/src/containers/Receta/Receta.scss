@@ -232,6 +232,7 @@
     margin: 0 .5rem 0 .5rem;
 
     &__botones {
+      font-size: .75rem;
       justify-content: space-between;
     }
 
@@ -259,7 +260,12 @@
 
     &__detalles {
       width: 100%;
-      display: block;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__instrucciones {
+      order: 1;
     }
   }
 

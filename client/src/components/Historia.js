@@ -1,30 +1,27 @@
 import React from 'react';
-// Bootstrap
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-// App
-import Tarjeta from './Tarjeta';
+import { Link } from 'react-router-dom';
 
 export default function Historia(props) {
   const recetas = props.recetario.map(receta => {
     return (
-      <Col key={receta.id}>
-        <Tarjeta
-          nombre={receta.nombre}
-          imagen={receta.imagen}
-          id={receta.id}
-        />
-      </Col>
+      <div className="historia__receta" key={receta.id}>
+        <Link to={`/recipes/${receta.id}?from=history`}>
+          <img className="historia__receta-imagen" src={receta.imagen} />
+          <p className="historia__receta-nombre">{receta.nombre}</p>
+        </Link>
+      </div>
     )
   })
   
   return (
-      <Row>
-        <Col xs={12}>
+      <div className="historia">
+        <div className="historia__info">
           <h2>{props.consulta}</h2>
           <p>{props.fecha}</p>
-        </Col>
-        {recetas}
-      </Row>
+        </div>
+        <div className="historia__recetario">
+          {recetas}
+        </div>
+      </div>
   )
 }

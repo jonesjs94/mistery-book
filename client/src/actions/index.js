@@ -16,8 +16,8 @@ import {
 import { store } from '../store';
 // Librería para manejar el objeto Date
 import moment from 'moment';
-import 'moment/locale/es';
-moment.locale('es');
+import 'moment/locale/en-gb';
+moment.locale('en-gb');
 
 // ------------ FAVORITO ------------
 export const agregarFavorito = (receta) => {
@@ -227,7 +227,7 @@ const agregarHistorial = (consulta, recetario) => {
     }
     return datos
   })
-  let fecha = moment().format("h:mm a, D [de] MMMM YYYY");
+  let fecha = moment().format("h:mm a. MMMM D[th], YYYY");
   
   // Objeto de la historia
   const historia = { 

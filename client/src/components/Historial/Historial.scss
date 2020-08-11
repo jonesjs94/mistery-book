@@ -1,0 +1,87 @@
+// SASS
+@import '../../utilities/variables';
+@import '../../utilities/fonts';
+
+.contenedor-historial {
+  padding-top: $altura_nav;
+  font-family: 'Alegreya Sans', sans;
+  color: $marron;
+  width: 85%;
+  margin: auto;
+
+  & h1 {
+    font-size: 3rem;
+    margin: 2rem auto;
+  }
+
+  & a {
+    text-decoration: none;
+    color: $marron;
+  }
+}
+
+.historia {
+  width: 90%;
+  margin: 2rem auto 4rem auto;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    
+    & h2 {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+
+    & p {
+      font-size: 1.5rem;
+    }
+  }
+  
+  &__recetario {
+    display: grid;
+    grid-template-columns: repeat(8, 10%);
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__receta {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__receta-nombre {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: $notebook_breakpoint) {
+  .contenedor-historial {
+    & h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+  }
+  
+  .historia {
+    width: 100%;
+
+    &__info {
+      & h2 {
+        font-size: 1.5rem;
+      }
+
+      & p {
+        font-size: .75rem;
+      }
+    }
+    
+    &__recetario {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+    }
+  }
+}
