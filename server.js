@@ -1,4 +1,5 @@
 const express            = require("express"),
+      path               = require("path"),
       app                = express(),
       mongoose           = require("mongoose"),
       cors               = require("cors"),
@@ -49,7 +50,14 @@ app.use(favoritesRoute);
 app.use((req, res, next) => {
   res.locals.activeUser = req.user;
   next();
-})
+});
+
+// REACT
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log("Server up!"))

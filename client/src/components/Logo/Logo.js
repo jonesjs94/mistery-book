@@ -8,7 +8,7 @@ export default function Logo(props) {
   
   return (
       <h1 className={classLogo}>
-        <Link to="/">Mystery Book</Link>
+        <Link to="/">Mistery Book</Link>
       </h1>
   )
 }
