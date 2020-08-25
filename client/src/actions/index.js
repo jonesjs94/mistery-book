@@ -125,25 +125,23 @@ const buscarUsuarioError = (error) => {
  * Solicitud al servidor para obtener datos del usuario
  * 
  * @param {object} usuario 
+ * @param {string} url 
  */
-export const buscarUsuario = (usuario) => {
+export const buscarUsuario = (usuario, url) => {
   return dispatch => {
       const cabecera = new Headers();
       cabecera.set("Content-Type", "application/json");
       dispatch(buscarUsuarioPendiente());
-
-      const { url } = usuario;
-      const fecthUsuario = { username: usuario.username, password: usuario.password }
       
       fetch(url, {
         method: 'POST',
         headers: cabecera,
-        body: JSON.stringify(fecthUsuario)
+        body: JSON.stringify(usuario)
       })
       .then(respuesta => respuesta.json())
-      .then(usuario => {
-        dispatch(buscarUsuarioExito(usuario));
-        console.log(usuario);
+      .then(usuarioEncontrado => {
+        dispatch(buscarUsuarioExito(usuarioEncontrado));
+        console.log(usuarioEncontrado);
       })
       .catch((e) => {
         console.error(e);

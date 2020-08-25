@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    buscarUsuario: usuario => dispatch(buscarUsuario(usuario))
+    buscarUsuario: (usuario, url) => dispatch(buscarUsuario(usuario, url))
   }
 }
 
@@ -18,7 +18,6 @@ class FormularioEntrar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: '/login',
       username: '',
       password: ''
     }
@@ -35,7 +34,7 @@ class FormularioEntrar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.buscarUsuario(this.state);
+    this.props.buscarUsuario(this.state, '/login');
   }
 
   render() {
