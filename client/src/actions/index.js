@@ -133,12 +133,12 @@ export const buscarUsuario = (usuario) => {
       dispatch(buscarUsuarioPendiente());
 
       const { url } = usuario;
-      delete usuario["url"];
+      const fecthUsuario = { username: usuario.username, password: usuario.password }
       
       fetch(url, {
         method: 'POST',
         headers: cabecera,
-        body: JSON.stringify(usuario)
+        body: JSON.stringify(fecthUsuario)
       })
       .then(respuesta => respuesta.json())
       .then(usuario => {
