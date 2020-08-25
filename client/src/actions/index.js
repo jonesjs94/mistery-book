@@ -184,12 +184,13 @@ const buscarRecetarioError = (error) => {
  * 
  * @param {String} consulta - Texto de la búsqueda 
  */
-export const buscarRecetario = (consulta) => {
+export const buscarRecetario = (query) => {
+  const consulta = query.toLowerCase();
   return dispatch => {
+    
     console.log("Obteniendo recetas...");
     dispatch(guardarConsulta(consulta));
     dispatch(buscarRecetarioPendiente());
-    
     const apiKey = "03d842cc1cbc4535bf140ca81c4578ac";
     fetch(`https://api.spoonacular.com/recipes/random?number=8&tags=${consulta},&apiKey=${apiKey}`)
     .then(respuesta => {

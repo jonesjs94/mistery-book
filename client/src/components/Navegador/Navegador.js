@@ -136,7 +136,7 @@ class Navegador extends React.Component {
           <li className="menu__item">
           { // Modifica Elemento si se encuentra ingresado un usuario
             this.props.usuario ? 
-              (<span className="menu__enlace">
+              (<span className="menu__enlace usuario-activo">
                 <User />
                 {this.props.usuario}
               </span>) 

@@ -4,11 +4,13 @@ import { buscarRecetario } from '../../actions';
 import './Recetario.scss';
 import Tarjeta from '../../components/Tarjeta';
 import Buscador from '../Buscador/Buscador';
-import Cargador from '../../components/Cargador';
+import { Spinner } from 'css.gg';
+import { useChain, animated } from 'react-spring';
 
 const mapStateToProps = state => {
   return { 
-    recetario: state.recetario.data 
+    recetario: state.recetario.data,
+    cargando: state.recetario.cargando 
   }
 }
 
@@ -21,20 +23,13 @@ const mapDispatchToProps = dispatch => {
 class Recetario extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      cargando: false,
-    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.mostrarEstado = this.mostrarEstado.bind(this);
   }
 
   handleSubmit(consulta) {
-    // Despliego Icono de carga 
-    this.setState({ cargando: true }, () => {
-        // Dispatch
-        this.props.buscarRecetario(consulta);
-        this.setState({ cargando: false });
-    })
+    this.props.buscarRecetario(consulta);
   }
 
   mostrarEstado() {
@@ -61,15 +56,19 @@ class Recetario extends React.Component {
         )
       })
     }
-
-    const contenido = this.state.cargando ? <Cargador /> : recetas;
     
     return (
       <>
         <Buscador onSubmit={this.handleSubmit} />
         {/* <button onClick={this.mostrar}>Mostrar</button> */}
         <div className="recetario">
-          {contenido}
+        {
+          this.props.cargando ? 
+          <div className="recetario__spinner"><Spinner /></div> 
+          : 
+          recetas
+        }
+
         </div>
       </>
     )

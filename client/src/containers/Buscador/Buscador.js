@@ -27,6 +27,7 @@ class Buscador extends React.Component {
     // Envío consulta hacia componente padre para que haga la llamada a la API
     handleSubmit(e) {
       e.preventDefault();
+      document.getElementById("buscador").blur();
       this.props.onSubmit(this.state.value);
     }
     
@@ -39,9 +40,10 @@ class Buscador extends React.Component {
               <h2 className="form__titulo">Recipes</h2>
               <div className="form__grupo">
                 <input 
+                id="buscador"
                   onChange={this.handleChange} 
                   className="form__input"
-                  type="text"
+                  type="search"
                   placeholder="Type ingredientes, cuisins and more" 
                 />
                 <button type="submit" className="form__btn">

@@ -57,6 +57,9 @@
   }
 }
 
+
+// ---------- BREAKPOINTS ----------
+
 @media screen and (max-width: $tablet_breakpoint) {
   .contenedor {
     padding-top: 0;
@@ -73,6 +76,7 @@
     }
 
     &__btn {
+      font-size: 1rem;
       width: 90%;
       margin: 1.5rem auto;
     }

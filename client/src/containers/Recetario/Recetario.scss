@@ -10,6 +10,16 @@
   justify-content: center;
   background-color: $blanco;
 
+  &__spinner {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+
+    & i {
+      --ggs: 2;
+    }
+  }
+  
   & a {
     display: flex;
     position: relative;
@@ -76,11 +86,20 @@
 @media screen and (max-width: $tablet_breakpoint) {
   .recetario {
     grid-template-columns: repeat(auto-fill, minmax(200px, 600px));
+    gap: 0;
+
+    & a {
+      display: block;
+    }
   }
   
   .recetario .tarjeta {
     &__titulo {
       font-size: 1.1rem;
+    }
+
+    &__imagen {
+      border: 10px solid #fff;
     }
 
     &__texto {

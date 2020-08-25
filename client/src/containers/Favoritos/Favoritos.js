@@ -40,9 +40,7 @@ class Favoritos extends React.Component {
         />
       )
     })
-
-    console.log(elementos)
-    
+        
     return (
       <div className="favoritos">
         <div className="favoritos__contenedor">
