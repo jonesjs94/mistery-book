@@ -2,21 +2,20 @@ const express    = require("express"),
       router     = express.Router(),
       passport   = require("passport"),
       bcrypt     = require("bcrypt"),
-      middleware = require("../middleware/index"),
       User       = require("../models/User");
 
-router.get("/user", middleware.isLoggedIn, (req, res) => {
+router.get("/user", (req, res) => {
   let user = req.user;
   res.send({ user });
 })
 
 // ingreso
-router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local"), (req, res) => {
+router.post("/login", passport.authenticate("local"), (req, res) => {
   res.send(req.user);
 });
 
 // registro
-router.post("/signup", middleware.isNotLoggedIn, async (req, res) => {
+router.post("/signup", async (req, res) => {
   // Hashea contraseña
   const hashedPass = await bcrypt.hash(req.body.password, 10);
   

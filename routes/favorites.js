@@ -1,10 +1,9 @@
 const express    = require("express"),
       router     = express.Router(),
-      middleware = require("../middleware/index"),
       User       = require("../models/User");
 
 // ADD
-router.post("/favorites", middleware.isLoggedIn, (req, res) => {
+router.post("/favorites", (req, res) => {
   
   User.findByIdAndUpdate(
     req.user._id, 
@@ -22,7 +21,7 @@ router.post("/favorites", middleware.isLoggedIn, (req, res) => {
 });
 
 // DELETE
-router.get("/favorites/delete/:id", middleware.isLoggedIn, (req, res) => {
+router.get("/favorites/delete/:id", (req, res) => {
   User.findByIdAndUpdate(
     req.user._id, 
     {$pull: {favorites: {id: Number(req.params.id)} }},

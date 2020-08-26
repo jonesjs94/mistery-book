@@ -37,7 +37,9 @@ class Navegador extends React.Component {
     fetch("/user")
     .then(respuesta => respuesta.json())
     .then(resultado => {
-      this.props.buscarUsuarioExito(resultado.user);
+      if (resultado.user !== undefined) {
+        this.props.buscarUsuarioExito(resultado.user);
+      }
     })
     .catch(e => console.log(e))
   }

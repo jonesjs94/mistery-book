@@ -1,9 +1,8 @@
 const express    = require("express"),
       router     = express.Router(),
-      middleware = require("../middleware/index"),
       User       = require("../models/User");
 
-router.post("/history", middleware.isLoggedIn, (req, res) => {
+router.post("/history", (req, res) => {
   
   User.findByIdAndUpdate(
     req.user._id, 
