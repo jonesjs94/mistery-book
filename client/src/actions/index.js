@@ -129,12 +129,11 @@ const buscarUsuarioError = (error) => {
  */
 export const buscarUsuario = (usuario, path) => {
   return dispatch => {
-    const url = "https://mistery-book.herokuapp.com/" + path;
     const cabecera = new Headers();
     cabecera.set("Content-Type", "application/json");
     dispatch(buscarUsuarioPendiente());
     
-    fetch(url, {
+    fetch(path, {
       method: 'POST',
       headers: cabecera,
       body: JSON.stringify(usuario)
