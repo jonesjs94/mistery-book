@@ -55,14 +55,8 @@ app.use((req, res, next) => {
 // REACT
 app.use(express.static(path.join(__dirname, 'build')));
 
-let protectedPaths = ["/login"]
-
 app.get('/*', (req, res) => {
-  if(protectedPaths.includes(req.path)) {
-    return false;
-  } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  }
 });
 
 const port = process.env.PORT || 3001;
