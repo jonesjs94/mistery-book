@@ -127,26 +127,27 @@ const buscarUsuarioError = (error) => {
  * @param {object} usuario 
  * @param {string} url 
  */
-export const buscarUsuario = (usuario, url) => {
+export const buscarUsuario = (usuario, path) => {
   return dispatch => {
-      const cabecera = new Headers();
-      cabecera.set("Content-Type", "application/json");
-      dispatch(buscarUsuarioPendiente());
-      
-      fetch(url, {
-        method: 'POST',
-        headers: cabecera,
-        body: JSON.stringify(usuario)
-      })
-      .then(respuesta => respuesta.json())
-      .then(usuarioEncontrado => {
-        dispatch(buscarUsuarioExito(usuarioEncontrado));
-        console.log(usuarioEncontrado);
-      })
-      .catch((e) => {
-        console.error(e);
-        dispatch(buscarUsuarioError(e));
-      }) 
+    const url = "https://mistery-book.herokuapp.com/" + path;
+    const cabecera = new Headers();
+    cabecera.set("Content-Type", "application/json");
+    dispatch(buscarUsuarioPendiente());
+    
+    fetch(url, {
+      method: 'POST',
+      headers: cabecera,
+      body: JSON.stringify(usuario)
+    })
+    .then(respuesta => respuesta.json())
+    .then(usuarioEncontrado => {
+      dispatch(buscarUsuarioExito(usuarioEncontrado));
+      console.log(usuarioEncontrado);
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(buscarUsuarioError(e));
+    }) 
   }
 }
 // -----------------------------------
