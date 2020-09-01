@@ -76,10 +76,24 @@
       left: 1px;
       right: 1px;
     }
+
   }
 
   &__usuario {
     display: none;
+  }
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  background-color: $naranja;
+  color: #000;
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
   }
 }
 

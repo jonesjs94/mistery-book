@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Trail } from 'react-spring/renderprops';
 import { buscarRecetario } from '../../actions';
 import './Recetario.scss';
 import Tarjeta from '../../components/Tarjeta';
 import Buscador from '../Buscador/Buscador';
-import { Spinner } from 'css.gg';
-import { useChain, animated } from 'react-spring';
+import DivAbsoluto from '../../components/DivAbsoluto';
+import Loader from '../../components/Loader/Loader';
 
 const mapStateToProps = state => {
   return { 
@@ -23,54 +24,46 @@ const mapDispatchToProps = dispatch => {
 class Recetario extends React.Component {
   constructor(props) {
     super(props)
-
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.mostrarEstado = this.mostrarEstado.bind(this);
   }
 
   handleSubmit(consulta) {
     this.props.buscarRecetario(consulta);
   }
-
-  mostrarEstado() {
-    console.log(this.props.state)
-  }
   
-  render() {
-    const recetario = this.props.recetario;
-    console.log(recetario);
-    const recetas = []; // lista vacía para construir componentes con recetas
-    const hayRecetas = recetario.length; // booleano para saber si hay recetas
-
-    if (hayRecetas) {
-      recetario.forEach(receta => {
-        recetas.push(
-          <Tarjeta
-            key={receta.id}
-            path="recipes"
-            titulo={receta.title}
-            imagen={receta.image}
-            id={receta.id}
-            info={[receta.dishTypes[0], receta.readyInMinutes, receta.servings]}
-          />
-        )
-      })
-    }
-    
+  render() {    
     return (
-      <>
+      <DivAbsoluto>
         <Buscador onSubmit={this.handleSubmit} />
-        {/* <button onClick={this.mostrar}>Mostrar</button> */}
         <div className="recetario">
         {
           this.props.cargando ? 
-          <div className="recetario__spinner"><Spinner /></div> 
+          <Loader className="recetario__cargador" />
           : 
-          recetas
+          <Trail 
+            items={this.props.recetario} 
+            keys={receta => receta.id}
+            from={{opacity: 0, transform: 'translate3d(0,-40px,0)'}} 
+            to={{opacity: 1, transform: 'translate3d(0,0px,0)'}}
+            >
+              {receta => props => (
+                <div style={props}>
+                  <Tarjeta
+                    key={receta.id}
+                    className="animation-receta"
+                    path="recipes"
+                    titulo={receta.title}
+                    imagen={receta.image}
+                    id={receta.id}
+                    info={[receta.dishTypes[0], receta.readyInMinutes, receta.servings]}
+                  />
+                </div>
+              )}
+            </Trail>
         }
 
         </div>
-      </>
+      </DivAbsoluto>
     )
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import FormularioEntrar from '../../containers/FormularioEntrar';
 import FormularioRegistrar from '../../containers/FormularioRegistrar';
 import './Usuario.scss';
+import DivAbsoluto from '../DivAbsoluto';
 
 export default class Usuario extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ export default class Usuario extends React.Component {
     let info = this.state.statusPosition ? this.state.infoSignup : this.state.infoLogin;
 
     return (
+      <DivAbsoluto>
       <div className="usuario">
         <div className="usuario__contenedor">
 
@@ -67,6 +69,7 @@ export default class Usuario extends React.Component {
           </div>
         </div>
       </div>
+      </DivAbsoluto>
     )
   }
 }

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { removerFavorito } from '../../actions'
 import './Favoritos.scss';
 import TarjetaFavorito from '../../components/TarjetaFavorito';
+import DivAbsoluto from '../../components/DivAbsoluto';
+
 
 const mapStateToProps = state => {
   return {
@@ -42,12 +44,14 @@ class Favoritos extends React.Component {
     })
         
     return (
-      <div className="favoritos">
-        <div className="favoritos__contenedor">
-          <h1 className="favoritos__h1">My Favorites</h1>
-          <div className="favoritos__tarjetas">{elementos}</div>
+      <DivAbsoluto>
+        <div className="favoritos">
+          <div className="favoritos__contenedor">
+            <h1 className="favoritos__h1">My Favorites</h1>
+            <div className="favoritos__tarjetas">{elementos}</div>
+          </div>
         </div>
-      </div>
+      </DivAbsoluto>
     )
   }
  }

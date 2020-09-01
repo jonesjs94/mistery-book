@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { buscarReceta, agregarFavorito } from '../../actions';
 import { connect } from 'react-redux';
-import { Spinner, Alarm, Bowl, ArrowLeft } from 'css.gg';
+import { Alarm, Bowl, ArrowLeft } from 'css.gg';
 import BotonFavorito from '../../components/BotonFavorito/BotonFavorito';
+import DivAbsoluto from '../../components/DivAbsoluto';
+
 import './Receta.scss';
+import Loader from '../../components/Loader/Loader';
 
 const mapStateToProps = state => {
   return {
@@ -75,16 +78,15 @@ class Receta extends React.Component {
     const content = this.props.receta.content;
     const receta = this.props.receta.data;
     return (
+      <DivAbsoluto>
       <div className="contenedor-receta">
 
       {!content ? 
-        
-        <div className="contenedor_spinner"><Spinner /></div> 
-        
+        <Loader className="cargador" />        
+
         : 
 
         <div className="receta">
-
           <div className="receta__botones">
             <Link 
               to={`/${this.state.previousRoute}`} 
@@ -138,6 +140,7 @@ class Receta extends React.Component {
       }
 
       </div>
+      </DivAbsoluto>
     )
   }
 }

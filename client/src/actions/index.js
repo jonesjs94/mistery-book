@@ -2,6 +2,9 @@ import {
   BUSCAR_USUARIO_PENDIENTE,
   BUSCAR_USUARIO_EXITO,
   BUSCAR_USUARIO_ERROR,
+  RETIRAR_USUARIO_PENDIENTE,
+  RETIRAR_USUARIO_EXITO,
+  RETIRAR_USUARIO_ERROR,
   BUSCAR_RECETARIO_PENDIENTE,
   BUSCAR_RECETARIO_EXITO,
   BUSCAR_RECETARIO_ERROR,
@@ -99,6 +102,7 @@ export const buscarReceta = (id) => {
 // ------------- USUARIO -------------
 // -----------------------------------
 
+// ----------------------------------- SIGNIN/LOGIN
  const buscarUsuarioPendiente = () => {
   return {
     type: BUSCAR_USUARIO_PENDIENTE
@@ -149,6 +153,54 @@ export const buscarUsuario = (usuario, path) => {
     }) 
   }
 }
+
+// ----------------------------------- LOGOUT
+const retirarUsuarioPendiente = () => {
+  return {
+    type: RETIRAR_USUARIO_PENDIENTE
+  }
+}
+
+export const retirarUsuarioExito = (campoVacio) => {
+  return {
+    type: RETIRAR_USUARIO_EXITO,
+    content: true,
+    payload: campoVacio
+  }
+}
+
+const retirarUsuarioError = (error) => {
+  return {
+    type: RETIRAR_USUARIO_ERROR,
+    content: false,
+    payload: error
+  }
+}
+
+/**
+ * Solicitud al servidor para obtener datos del usuario
+ * 
+ * @param {object} usuario 
+ * @param {string} url 
+ */
+export const retirarUsuario = () => {
+  return dispatch => {
+    dispatch(retirarUsuarioPendiente());
+    
+    fetch("/logout")
+    .then(respuesta => respuesta.json())
+    .then(message => {
+      console.log(message.response)
+      dispatch(retirarUsuarioExito(""))
+    })
+    .catch(error => {
+      console.error(error)
+      dispatch(retirarUsuarioError(error))
+    });
+  }
+}
+
+
 // -----------------------------------
 
 
@@ -252,7 +304,7 @@ const agregarHistorial = (consulta, recetario) => {
  */
 const guardarEnDB = (objecto, url) => {
   const estado = store.getState();
-  const usuarioActivo = estado.usuario;
+  const usuarioActivo = estado.usuario.nombre;
 
   if (usuarioActivo) {
     const cabecera = new Headers();

@@ -23,16 +23,16 @@ export default function Tarjeta(props) {
   }
 
   return (
-    <div className="tarjeta">
-    <Link to={`/recipes/${id}?from=${path}`}>
-        <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
-        <div className="tarjeta__info">
-          <h3 className="tarjeta__titulo">{titulo}</h3>
-          <div className="tarjeta__texto">
-            <p>{handleInfo(info)}</p>
-          </div>
-        </div>
-    </Link>
-    </div>
+      <div className="tarjeta">
+        <Link to={`/recipes/${id}?from=${path}`}>
+            <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
+            <div className="tarjeta__info">
+              <h3 className="tarjeta__titulo">{titulo}</h3>
+              <div className="tarjeta__texto">
+                <p>{handleInfo(info)}</p>
+              </div>
+            </div>
+        </Link>
+      </div>
   )
 }

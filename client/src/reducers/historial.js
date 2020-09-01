@@ -1,9 +1,12 @@
 import {
   BUSCAR_USUARIO_EXITO,
+  RETIRAR_USUARIO_EXITO,
   AGREGAR_HISTORIAL
 } from './../actions/actionTypes';
 
-export default function historial(state = [], action) {
+const initialState = []
+
+export default function historial(state = initialState, action) {
   switch (action.type) {
     case BUSCAR_USUARIO_EXITO:
       return action.payload.history.reverse();
@@ -13,6 +16,8 @@ export default function historial(state = [], action) {
       // el Key va a ser 0 ya que no existen valores anteriores.
       // const id = Object.keys(state).length ? +Object.keys(state).pop()+1 : 0;
       return [action.payload, ...state]
+    case RETIRAR_USUARIO_EXITO:
+      return initialState;
     default:
       return state;
   }

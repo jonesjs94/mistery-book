@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { buscarUsuarioExito } from '../../actions';
+import { buscarUsuarioExito, retirarUsuario } from '../../actions';
 import './Navegador.scss';
 import Logo from '../Logo/Logo';
 import MenuHamburguesa from '../MenuHamburguesa/MenuHamburguesa';
-import { LoadbarDoc, User  } from 'css.gg';
+import { LoadbarDoc, User, LogOut  } from 'css.gg';
 
 const mapStateToProps = state => {
   return {
@@ -16,7 +16,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    buscarUsuarioExito: usuario => dispatch(buscarUsuarioExito(usuario))
+    buscarUsuarioExito: usuario => dispatch(buscarUsuarioExito(usuario)),
+    retirarUsuario: () => dispatch(retirarUsuario())
   }
 }
 
@@ -27,7 +28,7 @@ class Navegador extends React.Component {
       menuAbierto: false
     };
     this.listener = null;
-    // this.handleLogout = this.handleLogout.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.handleNavMenuToggle = this.handleNavMenuToggle.bind(this);
     this.checkLoggedIn = this.checkLoggedIn.bind(this);
   }
@@ -44,28 +45,11 @@ class Navegador extends React.Component {
     .catch(e => console.log(e))
   }
 
-  // handleLogout(e) {
-  //   e.preventDefault();
-  //   fetch("/logout")
-  //   .then(response => response.json())
-  //   .then(message => console.log(message.response))
-  //   .catch(error => console.error);
-  // }
-  // let botonLogout = () => {
-  //   if (!this.props.usuario) {
-  //     return undefined;
-  //   }
-  //   return (
-  //     <li className="menu__item">
-  //     <span 
-  //       className="menu__enlace" 
-  //       onClick={this.handleLogout}
-  //     >
-  //       <LogOut />
-  //     </span>
-  //   </li>
-  //   )
-  // } 
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.retirarUsuario();
+  }
+
 
   handleNavMenuToggle() {
     const estadoActual = this.state.menuAbierto;
@@ -99,7 +83,15 @@ class Navegador extends React.Component {
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
-
+    let componentLogout = () => {
+      if (this.props.usuario) {
+        return (<li onClick={this.handleLogout} className="menu__item logout">
+          <LogOut />
+        </li>)
+      } else {
+      }
+    }
+        
     return (
       <header className={classNav}>
         <MenuHamburguesa 
@@ -120,28 +112,28 @@ class Navegador extends React.Component {
           </li>
           
           <li className="menu__item">
-              <Link 
-                className="menu__enlace" 
-                onClick={this.handleNavMenuToggle} 
-                to="/history">
-                History
-              </Link>
+            <Link 
+              className="menu__enlace" 
+              onClick={this.handleNavMenuToggle} 
+              to="/history">
+              History
+            </Link>
           </li>
           <li className="menu__item">
-              <Link 
-                className="menu__enlace" 
-                onClick={this.handleNavMenuToggle} 
-                to="/favorites">
-                Favorites
-              </Link>
+            <Link 
+              className="menu__enlace" 
+              onClick={this.handleNavMenuToggle} 
+              to="/favorites">
+              Favorites
+            </Link>
           </li>
           <li className="menu__item">
           { // Modifica Elemento si se encuentra ingresado un usuario
             this.props.usuario ? 
-              (<span className="menu__enlace usuario-activo">
+              (<div className="menu__enlace usuario-activo">
                 <User />
                 {this.props.usuario}
-              </span>) 
+              </div>) 
               : 
               (<Link 
                 className="menu__enlace" 
@@ -152,6 +144,7 @@ class Navegador extends React.Component {
               </Link>)
           }
           </li>
+          {componentLogout()}
         </ul>
       </header>
     )

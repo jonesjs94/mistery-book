@@ -4,20 +4,17 @@
 
 .recetario {
   display: grid;
+  position: relative;
   padding-bottom: 2rem;
   grid-template-columns: repeat(2, minmax(200px, 600px));
   gap: 50px 50px;
   justify-content: center;
   background-color: $blanco;
 
-  &__spinner {
+  &__cargador {
     position: absolute;
     left: 50%;
-    top: 60%;
-
-    & i {
-      --ggs: 2;
-    }
+    top: 15%;
   }
   
   & a {
@@ -113,3 +110,4 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 600px));
   }
 }
+

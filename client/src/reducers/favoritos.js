@@ -1,6 +1,13 @@
-import { BUSCAR_USUARIO_EXITO, AGREGAR_FAVORITO, REMOVER_FAVORITO } from '../actions/actionTypes';
+import { 
+  BUSCAR_USUARIO_EXITO, 
+  AGREGAR_FAVORITO, 
+  REMOVER_FAVORITO,
+  RETIRAR_USUARIO_EXITO 
+} from '../actions/actionTypes';
 
-export default function favoritos(state = [], action) {
+const initialState = []
+
+export default function favoritos(state = initialState, action) {
   switch (action.type) {
     case BUSCAR_USUARIO_EXITO:
       return action.payload.favorites;
@@ -11,6 +18,8 @@ export default function favoritos(state = [], action) {
       ];
     case REMOVER_FAVORITO:
       return state.filter(recipe => recipe.id !== action.payload);
+    case RETIRAR_USUARIO_EXITO:
+      return initialState;
     default:
       return state;
   }

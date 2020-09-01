@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Historia from '../Historia';
 import './Historial.scss';
+import DivAbsoluto from '../DivAbsoluto';
 
 const mapStateToProps = state => {
   return { historial: state.historial };
@@ -20,12 +21,14 @@ function Historial(props) {
   });
 
   return (
-    <div className="contenedor-historial">
-      <h1>History Search</h1>
-      <div className="historial">
-        {contenido}
+    <DivAbsoluto>
+      <div className="contenedor-historial">
+        <h1>History Search</h1>
+        <div className="historial">
+          {contenido}
+        </div>
       </div>
-    </div>
+    </DivAbsoluto>
   )
 }
 

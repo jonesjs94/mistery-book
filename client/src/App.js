@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
+import { useTransition, animated } from 'react-spring';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 // App
@@ -16,19 +17,31 @@ import Usuario from './components/Usuario/Usuario';
 import Favoritos from './containers/Favoritos/Favoritos';
 
 export default function App() {
+  const location = useLocation();
+  
+  const transitions = useTransition(location, location => location.pathname, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  })
+  
   return (
-      <Router>
-        <Navegador />
-        <ScrollToTop />
-        <Switch>
-          <Route exact path="/" component={Presentacion} />
-          <Route exact path="/user" component={Usuario} />
-          <Route exact path="/recipes" component={Recetario} />
-          <Route exact path="/recipes/:id" component={Receta} />
-          <Route exact path="/favorites" component={Favoritos} />
-          <Route exact path="/history" component={Historial} />
-        </Switch>  
-      </Router>
+    <>
+      <Navegador />
+      <ScrollToTop />
+      {transitions.map(({ item, props, key }) =>(
+        <animated.div key={key} style={props}>
+          <Switch location={item}>
+            <Route exact path="/" component={Presentacion} />
+            <Route exact path="/user" component={Usuario} />
+            <Route exact path="/recipes" component={Recetario} />
+            <Route exact path="/recipes/:id" component={Receta} />
+            <Route exact path="/favorites" component={Favoritos} />
+            <Route exact path="/history" component={Historial} />
+          </Switch>  
+        </animated.div>
+      )) }
+    </>
   )
 }
 

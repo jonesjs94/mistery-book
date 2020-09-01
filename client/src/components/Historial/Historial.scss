@@ -3,11 +3,10 @@
 @import '../../utilities/fonts';
 
 .contenedor-historial {
-  padding-top: $altura_nav;
   font-family: 'Alegreya Sans', sans;
   color: $marron;
-  width: 85%;
-  margin: auto;
+  background: $blanco;
+  padding: $altura_nav 5%;
 
   & h1 {
     font-size: 3rem;
