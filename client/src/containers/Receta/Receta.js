@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { buscarReceta, agregarFavorito } from '../../actions';
 import { connect } from 'react-redux';
+import VisibilitySensor from 'react-visibility-sensor';
+import { Spring, Trail } from 'react-spring/renderprops';
 import { Alarm, Bowl, ArrowLeft } from 'css.gg';
 import BotonFavorito from '../../components/BotonFavorito/BotonFavorito';
 import DivAbsoluto from '../../components/DivAbsoluto';
-
 import './Receta.scss';
 import Loader from '../../components/Loader/Loader';
 
@@ -77,16 +78,17 @@ class Receta extends React.Component {
   render() {
     const content = this.props.receta.content;
     const receta = this.props.receta.data;
+
+    
     return (
       <DivAbsoluto>
       <div className="contenedor-receta">
-
       {!content ? 
         <Loader className="cargador" />        
-
         : 
-
-        <div className="receta">
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+        {props => 
+          <div style={props} className="receta">
           <div className="receta__botones">
             <Link 
               to={`/${this.state.previousRoute}`} 
@@ -102,11 +104,11 @@ class Receta extends React.Component {
               className="receta__btn-favorito" 
               tippyClassName="tippy-favoritos" />
           </div>
-          {/* NOMBRE DE RECETA */}
+          {/*-------------- NOMBRE DE RECETA --------------*/}
           <h1 className="receta__titulo">{receta.title}</h1>
-          {/* FOTO DE RECETA */}
+          {/*-------------- FOTO DE RECETA --------------*/}
           <img className="receta__imagen" src={receta.image} alt="meal" />
-          {/* VARIOS DATOS */}
+          {/*-------------- VARIOS DATOS --------------*/}
           <div className="receta__info info">
             <div className="info__icono alarm">
               <Alarm />
@@ -121,22 +123,25 @@ class Receta extends React.Component {
               <span>Score of {receta.spoonacularScore}%</span>
             </div>                        
           </div>
-          {/* RESUMEN */}
+          {/*-------------- RESUMEN --------------*/}
           <p className="receta__resumen" dangerouslySetInnerHTML={{__html: receta.summary}}></p>
 
           <div className="receta__detalles">
-            {/* INSTRUCCIONES */}
+            {/*-------------- INSTRUCCIONES --------------*/}
             <ul className="receta__instrucciones instrucciones">
               <h2 className="ingredientes__titulo">Instructions</h2>
               {mapInstructions(receta.analyzedInstructions[0].steps)}
             </ul>
-            {/* INGREDIENTES */}
+            {/*-------------- INGREDIENTES --------------*/}
             <ul className="receta__ingredientes ingredientes">
               <h2 className="ingredientes__titulo">Ingredient for {receta.servings} servings</h2>
               {mapIngredients(receta.extendedIngredients)}
             </ul>
           </div>
-        </div>
+          </div>
+        }
+        </Spring>
+
       }
 
       </div>
@@ -151,30 +156,54 @@ export default connect(
 )(Receta)
 
 function mapInstructions(instructions) {
-  let elements = instructions.map(step => 
-    <li 
-      key={step.number}
-      className="instrucciones__pasos"
-      >
-      <div className="instrucciones__paso">
-        <span>Step {step.number}</span>
-      </div>
-      <p className="instrucciones__texto">{step.step}</p>
-    </li>
-  );
-  return elements;
+  return instructions.map(step => (
+    <VisibilitySensor>
+      {({ isVisible }) => (
+        <Spring  
+          from={{ opacity: 0, transform: 'translateX(-200px)' }}
+          to={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateX(0)' : 'translateX(-200px)' }}
+        >
+        {props => 
+          <li
+            style={props}
+            key={step.number}
+            className="instrucciones__pasos"
+          >
+            <div className="instrucciones__paso">
+              <span>Step {step.number}</span>
+            </div>
+            <p className="instrucciones__texto">{step.step}</p>
+          </li>
+        }
+        </Spring>
+      )
+      }
+    </VisibilitySensor>
+  ))
 }
 
 function mapIngredients(ingredients) {
-  let elements = ingredients.map((ingredient, index) => 
-    <li 
-      key={index}
-      className="ingredientes__ingrediente"
+  return ingredients.map((ingredient, index) => 
+  <VisibilitySensor>
+    {({ isVisible }) => (
+      <Spring  
+        from={{ opacity: 0, transform: 'translateX(200px)' }}
+        to={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateX(0)' : 'translateX(200px)' }}
       >
-      <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} />
-      <p>{ingredient.name}</p>
-      <p>{`${Math.ceil(ingredient.measures.metric.amount)} ${ingredient.measures.metric.unitShort}`}</p>
-    </li>
+        {props => 
+          <li 
+            style={props}
+            key={index}
+            className="ingredientes__ingrediente"
+          >
+            <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} />
+            <p>{ingredient.name}</p>
+            <p>{`${Math.ceil(ingredient.measures.metric.amount)} ${ingredient.measures.metric.unitShort}`}</p>
+          </li>
+        }
+      </Spring>
+      )
+    }
+  </VisibilitySensor>
   );
-  return elements;
 }
