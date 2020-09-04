@@ -28,7 +28,8 @@ class Receta extends React.Component {
     super(props);
     this.state = {
       previousRoute: '',
-      isInFavorites: false
+      isInFavorites: false,
+      imgLoaded: false
     }
     this.addFav = this.addFav.bind(this);
     this.handleStateFav = this.handleStateFav.bind(this);
@@ -78,15 +79,17 @@ class Receta extends React.Component {
   render() {
     const content = this.props.receta.content;
     const receta = this.props.receta.data;
-
-    
+  
+  if(!this.state.imgLoaded) {
     return (
       <DivAbsoluto>
       <div className="contenedor-receta">
       {!content ? 
         <Loader className="cargador" />        
         : 
-        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+
+
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} delay={300}>
         {props => 
           <div style={props} className="receta">
           <div className="receta__botones">
@@ -147,6 +150,7 @@ class Receta extends React.Component {
       </div>
       </DivAbsoluto>
     )
+  }
   }
 }
 

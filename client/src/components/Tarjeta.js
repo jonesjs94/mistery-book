@@ -1,28 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Tarjeta(props) {
+export default class Tarjeta extends React.Component {
+  render() {
+    const { 
+      id, 
+      titulo, 
+      imagen, 
+      info, 
+      path
+    } = this.props;
 
-  const { 
-    id, 
-    titulo, 
-    imagen, 
-    info, 
-    path
-  } = props;
-    
-  function handleInfo(info) {
-    if(!info.length) { return false }
-    const [dishTypes, readyInMinutes, servings] = info;
-    let array = [];
-    if(dishTypes !== undefined)      array.push(dishTypes);
-    if(readyInMinutes !== undefined) array.push(`${readyInMinutes} min`);
-    if(servings !== undefined)       array.push(`${servings} servings`);
-    let finalInfo = array.join("  /  ");
-    return finalInfo;
-  }
-
-  return (
+    return (
       <div className="tarjeta">
         <Link to={`/recipes/${id}?from=${path}`}>
             <img className="tarjeta__imagen" src={imagen} alt="imagen of recipe" />
@@ -34,5 +23,17 @@ export default function Tarjeta(props) {
             </div>
         </Link>
       </div>
-  )
+    )
+  }
+}
+
+function handleInfo(info) {
+  if(!info.length) { return false }
+  const [dishTypes, readyInMinutes, servings] = info;
+  let array = [];
+  if(dishTypes !== undefined)      array.push(dishTypes);
+  if(readyInMinutes !== undefined) array.push(`${readyInMinutes} min`);
+  if(servings !== undefined)       array.push(`${servings} servings`);
+  let finalInfo = array.join("  /  ");
+  return finalInfo;
 }

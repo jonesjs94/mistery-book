@@ -11,12 +11,12 @@ const mapStateToProps = state => {
 function Historial(props) {
   const contenido = props.historial.map((historia, i) => {
     return (
-      <Historia 
-        key={i}
-        consulta={historia.consulta}
-        recetario={historia.recetario}
-        fecha={historia.fecha}
-      /> 
+        <Historia 
+          key={i}
+          consulta={historia.consulta}
+          recetario={historia.recetario}
+          fecha={historia.fecha}
+        /> 
     )
   });
 
