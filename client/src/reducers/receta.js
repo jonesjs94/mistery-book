@@ -15,7 +15,7 @@ export default function receta(state = initialState, action) {
   switch (action.type) {
     case BUSCAR_RECETA_PENDIENTE:
       return {
-        ...state,
+        ...initialState,
         cargando: true
       }
     case BUSCAR_RECETA_EXITO:
