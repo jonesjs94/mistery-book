@@ -19,10 +19,12 @@ import Favoritos from './containers/Favoritos/Favoritos';
 export default function App() {
   const location = useLocation();
   
+  const breakpointMobile = window.innerWidth < 720;
+  
   const transitions = useTransition(location, location => location.pathname, {
-    from: { opacity: 0 },
+    from: { opacity: breakpointMobile ? 1 : 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 },
+    leave: { opacity: breakpointMobile ? 1 : 0 },
   })
   
   return (

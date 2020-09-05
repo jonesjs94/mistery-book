@@ -79,19 +79,19 @@ class Navegador extends React.Component {
   componentDidUpdate() {
     document.removeEventListener("scroll", this.listener);
   }
+
+  componentLogout = () => {
+    if (this.props.usuario) {
+      return (<li onClick={this.handleLogout} className="menu__item logout">
+        <LogOut />
+      </li>)
+    }
+  }
   
   render() {
     let classNav  = this.state.NavbarEnTop ? 'navbar' : 'navbar navbar--scroll';
     let classMenu = this.state.menuAbierto ? 'menu menu-abierto' : 'menu';
-    let componentLogout = () => {
-      if (this.props.usuario) {
-        return (<li onClick={this.handleLogout} className="menu__item logout">
-          <LogOut />
-        </li>)
-      } else {
-      }
-    }
-        
+
     return (
       <header className={classNav}>
         <MenuHamburguesa 
@@ -144,7 +144,7 @@ class Navegador extends React.Component {
               </Link>)
           }
           </li>
-          {componentLogout()}
+          {this.componentLogout()}
         </ul>
       </header>
     )

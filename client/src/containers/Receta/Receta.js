@@ -29,7 +29,7 @@ class Receta extends React.Component {
     this.state = {
       previousRoute: '',
       isInFavorites: false,
-      imgLoaded: false
+      imgLoaded: false,
     }
     this.addFav = this.addFav.bind(this);
     this.handleStateFav = this.handleStateFav.bind(this);
@@ -79,6 +79,7 @@ class Receta extends React.Component {
   render() {
     const content = this.props.receta.content;
     const receta = this.props.receta.data;
+    const breakpointMobile = window.innerWidth < 720;
   
   if(!this.state.imgLoaded) {
     return (
@@ -89,7 +90,7 @@ class Receta extends React.Component {
         : 
 
 
-        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} delay={300}>
+        <Spring from={{ opacity: breakpointMobile ? 1 : 0 }} to={{ opacity: 1 }} delay={300}>
         {props => 
           <div style={props} className="receta">
           <div className="receta__botones">
@@ -132,12 +133,12 @@ class Receta extends React.Component {
           <div className="receta__detalles">
             {/*-------------- INSTRUCCIONES --------------*/}
             <ul className="receta__instrucciones instrucciones">
-              <h2 className="ingredientes__titulo">Instructions</h2>
+              <h2 id="instructions" className="ingredientes__titulo">Instructions</h2>
               {mapInstructions(receta.analyzedInstructions[0].steps)}
             </ul>
             {/*-------------- INGREDIENTES --------------*/}
             <ul className="receta__ingredientes ingredientes">
-              <h2 className="ingredientes__titulo">Ingredient for {receta.servings} servings</h2>
+              <h2 id="ingredients" className="ingredientes__titulo">Ingredient for {receta.servings} servings</h2>
               {mapIngredients(receta.extendedIngredients)}
             </ul>
           </div>
@@ -160,12 +161,20 @@ export default connect(
 )(Receta)
 
 function mapInstructions(instructions) {
-  return instructions.map(step => (
-    <VisibilitySensor>
+  const breakpointMobile = window.innerWidth < 720;
+
+  return instructions.map((step, index) => (
+    <VisibilitySensor key={index}>
       {({ isVisible }) => (
         <Spring  
-          from={{ opacity: 0, transform: 'translateX(-200px)' }}
-          to={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateX(0)' : 'translateX(-200px)' }}
+          from={{ 
+            opacity: breakpointMobile ? 1 : 0, 
+            transform: breakpointMobile ? 'translateX(0)' : 'translateX(-200px)'
+          }}
+          to={{ 
+            opacity: isVisible || breakpointMobile ? 1 : 0, 
+            transform: isVisible || breakpointMobile ? 'translateX(0)' : 'translateX(-200px)' 
+          }}
         >
         {props => 
           <li
@@ -187,12 +196,20 @@ function mapInstructions(instructions) {
 }
 
 function mapIngredients(ingredients) {
+  const breakpointMobile = window.innerWidth < 720;
+  
   return ingredients.map((ingredient, index) => 
-  <VisibilitySensor>
+  <VisibilitySensor key={index}>
     {({ isVisible }) => (
       <Spring  
-        from={{ opacity: 0, transform: 'translateX(200px)' }}
-        to={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateX(0)' : 'translateX(200px)' }}
+          from={{ 
+            opacity: breakpointMobile ? 1 : 0, 
+            transform: breakpointMobile ? 'translateX(0)' : 'translateX(200px)'
+          }}
+          to={{ 
+            opacity: isVisible || breakpointMobile ? 1 : 0, 
+            transform: isVisible || breakpointMobile ? 'translateX(0)' : 'translateX(200px)' 
+          }}
       >
         {props => 
           <li 

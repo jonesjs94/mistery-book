@@ -31,7 +31,9 @@ class Recetario extends React.Component {
     this.props.buscarRecetario(consulta);
   }
   
-  render() {    
+  render() {
+    const breakpointMobile = window.innerWidth < 720;
+    
     return (
       <DivAbsoluto>
         <Buscador onSubmit={this.handleSubmit} />
@@ -43,8 +45,14 @@ class Recetario extends React.Component {
           <Trail 
             items={this.props.recetario} 
             keys={receta => receta.id}
-            from={{opacity: 0, transform: 'translate3d(0,-40px,0)'}} 
-            to={{opacity: 1, transform: 'translate3d(0,0px,0)'}}
+            from={{
+              opacity: breakpointMobile ? 1 : 0, 
+              transform: breakpointMobile ? 'translate3d(0,0px,0)' : 'translate3d(0,-40px,0)',
+            }} 
+            to={{
+              opacity: 1, 
+              transform: 'translate3d(0,0px,0)'
+              }}
             delay={300}
             >
               {receta => props => (

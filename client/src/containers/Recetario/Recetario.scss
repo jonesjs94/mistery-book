@@ -97,7 +97,7 @@
     }
 
     &__imagen {
-      border: 10px solid #fff;
+      border: 5px solid #fff;
     }
 
     &__texto {
@@ -109,6 +109,14 @@
 @media screen and (max-width: $notebook_breakpoint) {
   .recetario {
     grid-template-columns: repeat(auto-fill, minmax(200px, 600px));
+
+    &__cargador {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
+
+  
 }
 
